@@ -6,9 +6,9 @@ en:
           discourse_gamification: "Discourse Gamification"
   js:
     # directory column workaround
-    gamification_score: "Cheers"
+    gamification_score: "Points"
     gamification:
-      score: "Cheers"
+      score: "Points"
       you: "You"
       leaderboard:
         title: "Leaderboards"
