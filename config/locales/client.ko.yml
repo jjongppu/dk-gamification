@@ -6,7 +6,9 @@
 
 ko:
   js:
+    gamification_score: "포인트"
     gamification:
+      score: "포인트"
       you: "사용자님"
       leaderboard:
         link_to_settings: "설정"

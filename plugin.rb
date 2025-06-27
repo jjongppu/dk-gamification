@@ -51,6 +51,7 @@ after_initialize do
   require_relative "lib/discourse_gamification/scorables/like_given"
   require_relative "lib/discourse_gamification/scorables/like_received"
   require_relative "lib/discourse_gamification/scorables/post_created"
+  require_relative "lib/discourse_gamification/scorables/first_reply_of_day"
   require_relative "lib/discourse_gamification/scorables/post_read"
   require_relative "lib/discourse_gamification/scorables/solutions"
   require_relative "lib/discourse_gamification/scorables/time_read"
