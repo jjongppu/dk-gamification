@@ -65,6 +65,7 @@ after_initialize do
   require_relative "lib/discourse_gamification/scorables/chat_message_created"
   require_relative "lib/discourse_gamification/recalculate_scores_rate_limiter"
   require_relative "lib/discourse_gamification/leaderboard_cached_view"
+  require_relative "lib/discourse_gamification/first_login_rewarder"
 
   reloadable_patch do |plugin|
     User.prepend(DiscourseGamification::UserExtension)
@@ -116,6 +117,10 @@ after_initialize do
 
   on(:merging_users) do |source_user, target_user|
     DiscourseGamification::GamificationScore.merge_scores(source_user, target_user)
+  end
+
+  on(:user_logged_in) do |user|
+    DiscourseGamification::FirstLoginRewarder.new(user).call
   end
 
   on(:post_created) do |post, opts, user|

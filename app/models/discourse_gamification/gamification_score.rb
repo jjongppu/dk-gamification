@@ -14,11 +14,11 @@ module ::DiscourseGamification
       enabled_scorables.map { "( #{_1.query} )" }.join(" UNION ALL ")
     end
 
-    def self.adjust_score(user_id:, date:, points:)
-      DB.exec(<<~SQL, user_id: user_id, date: date, points: points)
-        INSERT INTO gamification_scores (user_id, date, score)
-        VALUES (:user_id, :date, :points)
-        ON CONFLICT (user_id, date) DO UPDATE
+    def self.adjust_score(user_id:, points:)
+      DB.exec(<<~SQL, user_id: user_id, points: points)
+        INSERT INTO gamification_scores (user_id, score, date)
+        VALUES (:user_id, :points, CURRENT_DATE)
+        ON CONFLICT (user_id) DO UPDATE
         SET score = gamification_scores.score + EXCLUDED.score;
       SQL
 
@@ -29,22 +29,20 @@ module ::DiscourseGamification
       queries = only_subclass&.query || scorables_queries
 
       DB.exec(<<~SQL, since: since_date)
-        DELETE FROM gamification_scores
-        WHERE date >= :since;
+        DELETE FROM gamification_scores;
 
-        INSERT INTO gamification_scores (user_id, date, score)
-        SELECT user_id, date, SUM(points) AS score
+        INSERT INTO gamification_scores (user_id, score, date)
+        SELECT user_id, SUM(points) AS score, CURRENT_DATE
         FROM (
           #{queries}
           UNION ALL
-          SELECT user_id, date, SUM(points) AS points
+          SELECT user_id, SUM(points) AS points
           FROM gamification_score_events
-          WHERE date >= :since
-          GROUP BY 1, 2
+          GROUP BY 1
         ) AS source
         WHERE user_id IS NOT NULL
-        GROUP BY 1, 2
-        ON CONFLICT (user_id, date) DO UPDATE
+        GROUP BY 1
+        ON CONFLICT (user_id) DO UPDATE
         SET score = EXCLUDED.score;
       SQL
     end
@@ -52,14 +50,14 @@ module ::DiscourseGamification
     def self.merge_scores(source_user, target_user)
       DB.exec(<<~SQL, source_id: source_user.id, target_id: target_user.id)
         WITH new_scores AS (
-          SELECT :target_id AS user_id, date, SUM(score) AS score
+          SELECT :target_id AS user_id, SUM(score) AS score
           FROM gamification_scores
           WHERE user_id IN (:source_id, :target_id)
-          GROUP BY 1, 2
-        ) INSERT INTO gamification_scores (user_id, date, score)
-          SELECT user_id, date, score AS score
+          GROUP BY 1
+        ) INSERT INTO gamification_scores (user_id, score, date)
+          SELECT user_id, score AS score, CURRENT_DATE
           FROM new_scores
-          ON CONFLICT (user_id, date) DO UPDATE
+          ON CONFLICT (user_id) DO UPDATE
           SET score = EXCLUDED.score;
       SQL
 
@@ -82,6 +80,5 @@ end
 #
 # Indexes
 #
-#  index_gamification_scores_on_date              (date)
-#  index_gamification_scores_on_user_id_and_date  (user_id,date) UNIQUE
+#  index_gamification_scores_on_user_id  (user_id) UNIQUE
 #
