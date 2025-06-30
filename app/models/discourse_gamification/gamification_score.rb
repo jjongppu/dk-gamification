@@ -14,6 +14,17 @@ module ::DiscourseGamification
       enabled_scorables.map { "( #{_1.query} )" }.join(" UNION ALL ")
     end
 
+    def self.adjust_score(user_id:, date:, points:)
+      DB.exec(<<~SQL, user_id: user_id, date: date, points: points)
+        INSERT INTO gamification_scores (user_id, date, score)
+        VALUES (:user_id, :date, :points)
+        ON CONFLICT (user_id, date) DO UPDATE
+        SET score = gamification_scores.score + EXCLUDED.score;
+      SQL
+
+      LeaderboardCachedView.refresh_all
+    end
+
     def self.calculate_scores(since_date: Date.today, only_subclass: nil)
       queries = only_subclass&.query || scorables_queries
 
