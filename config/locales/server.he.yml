@@ -17,6 +17,7 @@ he:
     post_created_score_value: "ערך התשועה שמוענק כאשר משתמש יוצר פוסט"
     flag_created_score_value: "ערך התשועה שמוענק כאשר משתמש מסמן פוסט בדגל והדגל מתקבל על ידי משתמש צוות"
     day_visited_score_value: "ערך התשועה שמוענק עבור כל יום בו משתמש מבקר באתר"
+    day_visited_score_reason: "Identifier used when awarding points for daily check-in"
     scorable_categories: "רשימת הקטגוריות בהן פעולות מייצרות תשועות. יש להשאיר ריק כדי להפעיל תשועות בכל הקטגוריות"
     reaction_received_score_value: "ערך התשועה שמוענק כשמשתמש מקבל רגש"
     reaction_given_score_value: "ערך התשועה שמוענק עבור כל רגש שמשתמש נותן"

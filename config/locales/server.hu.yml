@@ -17,6 +17,7 @@ hu:
     post_created_score_value: "Pontszám értéke, amely új bejegyzés létrehozásáért jár"
     flag_created_score_value: "Pontszám értéke, ami minden olyan megjelölés után jár, amit egy stábtag elfogadott"
     day_visited_score_value: "Pontszám értéke, amely minden napi első bejelentkezés után jár"
+    day_visited_score_reason: "Identifier used when awarding points for daily check-in"
     scorable_categories: "Azoknak a kategóriáknak a listája, ahol a cselekvésekért pontszámok járnak. Hagyja üresen, hogy az összes kategóriát engedélyezze"
     reaction_received_score_value: "Pontszám értéke, amelyet akkor kapnak, amikor a felhasználó reakciót kap"
     reaction_given_score_value: "Pontszám értéke, amelyet akkor kapnak, amikor a felhasználó reakciót ad"

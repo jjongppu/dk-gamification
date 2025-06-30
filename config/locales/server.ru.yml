@@ -17,6 +17,7 @@ ru:
     post_created_score_value: "Баллы, начисляемые за создание сообщения"
     flag_created_score_value: "Баллы, начисляемые за жалобу, принятую персоналом форума"
     day_visited_score_value: "Баллы, начисляемые за каждый день посещения форума"
+    day_visited_score_reason: "Identifier used when awarding points for daily check-in"
     scorable_categories: "Список разделов, в которых начисляются баллы. Оставьте этот список пустым, если баллы должны начисляться во всех разделах"
     reaction_received_score_value: "Баллы, начисляемые за получение реакции"
     reaction_given_score_value: "Баллы, начисляемые за каждую поставленную реакцию"

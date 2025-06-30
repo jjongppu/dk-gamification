@@ -17,6 +17,7 @@ ja:
     post_created_score_value: "ユーザーが投稿を作成した時に付与される拍手の値"
     flag_created_score_value: "ユーザーが投稿を通報し、その通報がスタッフユーザーに承認された時に付与される拍手の値"
     day_visited_score_value: "ユーザーがサイトにアクセスする日ごとに付与される拍手の値"
+    day_visited_score_reason: "Identifier used when awarding points for daily check-in"
     scorable_categories: "アクションによって拍手が生成されるカテゴリのリスト。全カテゴリで拍手を有効にする場合は、空白のままにします。"
     reaction_received_score_value: "ユーザーがリアクションを受けた時に付与される拍手の値"
     reaction_given_score_value: "ユーザーがリアクションするたびに付与される拍手の値"

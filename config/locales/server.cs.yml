@@ -17,6 +17,7 @@ cs:
     post_created_score_value: "Hodnota ovace udělené, když uživatel vytvoří příspěvek"
     flag_created_score_value: "Hodnota ovace, která se uděluje, když uživatel nahlásí příspěvek, a tento příznak je přijat členem redakce"
     day_visited_score_value: "Hodnota ovace za každý den, kdy uživatel navštíví web"
+    day_visited_score_reason: "Identifier used when awarding points for daily check-in"
     scorable_categories: "Seznam kategorií, kde aktivita bude generovat ovace. Ponechte prázdné, abyste povolili ovace ve všech kategoriích"
     reaction_received_score_value: "Hodnota ovace udělené, když uživatel obdrží reakci"
     reaction_given_score_value: "Hodnota ovace udělená za každou reakci uživatele"
