@@ -17,7 +17,6 @@ register_asset "stylesheets/common/leaderboard-info-modal.scss"
 register_asset "stylesheets/common/leaderboard-minimal.scss"
 register_asset "stylesheets/common/leaderboard-admin.scss"
 register_asset "stylesheets/common/gamification-score.scss"
-register_asset "javascripts/initializers/check-in.js"
 
 register_svg_icon "crown"
 register_svg_icon "award"
