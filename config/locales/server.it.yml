@@ -17,6 +17,7 @@ it:
     post_created_score_value: "Il valore dei complimenti assegnati quando un utente crea un messaggio"
     flag_created_score_value: "Il valore dei complimenti assegnati quando un utente segnala un messaggio e la segnalazione è accettata da un utente dello staff"
     day_visited_score_value: "Il valore dei complimenti assegnati per ogni giorno in cui un utente visita il sito"
+    day_visited_score_reason: "Identifier used when awarding points for daily check-in"
     scorable_categories: "Elenco di categorie in cui le azioni genereranno complimenti. Lascia vuota l'opzione per abilitare i complimenti in tutte le categorie"
     reaction_received_score_value: "Il valore dei complimenti assegnati quando un utente riceve una reazione"
     reaction_given_score_value: "Il valore dei complimenti assegnati per ogni reazione messa da un utente"

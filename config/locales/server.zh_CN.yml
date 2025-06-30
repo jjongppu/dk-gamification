@@ -17,6 +17,7 @@ zh_CN:
     post_created_score_value: "当用户创建帖子时所获得的点数"
     flag_created_score_value: "当用户举报帖子并且该举报被管理人员接受时所获得的点数"
     day_visited_score_value: "用户每天访问站点所获得的点数"
+    day_visited_score_reason: "Identifier used when awarding points for daily check-in"
     scorable_categories: "操作将生成点数的类别列表。留空以在所有类别上启用点数。"
     reaction_received_score_value: "当用户收到回应时所获得的点数"
     reaction_given_score_value: "用户每给出一个回应时所获得的点数"

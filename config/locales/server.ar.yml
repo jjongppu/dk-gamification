@@ -17,6 +17,7 @@ ar:
     post_created_score_value: "قيمة الهتافات الممنوح عند إنشاء المستخدم لمنشور"
     flag_created_score_value: "قيمة الهتافات الممنوح عند وضع المستخدم علامة على منشور، ويتم قبول هذه العلامة من قِبل مستخدم في فريق العمل"
     day_visited_score_value: "قيمة الهتافات الممنوح لكل يوم يزور فيه المستخدم الموقع"
+    day_visited_score_reason: "Identifier used when awarding points for daily check-in"
     scorable_categories: "قائمة الفئات التي ستُنشئ فيها الإجراءات هتافات. اتركه فارغًا لتفعيل الهتافات في جميع الفئات"
     reaction_received_score_value: "قيمة الهتاف الممنوحة عند تلقي المستخدم تفاعلًا"
     reaction_given_score_value: "قيمة الهتاف الممنوحة لكل تفاعل يمنحه المستخدم"

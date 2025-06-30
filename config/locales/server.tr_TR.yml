@@ -17,6 +17,7 @@ tr_TR:
     post_created_score_value: "Bir kullanıcı bir gönderi oluşturduğunda verilen tezahüratın değeri"
     flag_created_score_value: "Bir kullanıcı bir gönderiye bayrak eklendiğinde ve bu bayrak bir personel kullanıcı tarafından kabul edildiğinde verilen tezahüratın değeri"
     day_visited_score_value: "Bir kullanıcının siteyi ziyaret ettiği her gün için verilen tezahüratın değeri"
+    day_visited_score_reason: "Identifier used when awarding points for daily check-in"
     scorable_categories: "Eylemlerin tezahürat oluşturacağı kategorilerin listesi. Tüm kategorilerde tezahüratları etkinleştirmek için boş bırakın"
     reaction_received_score_value: "Bir kullanıcı tepki aldığında verilen tezahüratın değeri"
     reaction_given_score_value: "Bir kullanıcının verdiği her tepki için verilen tezahüratın değeri"

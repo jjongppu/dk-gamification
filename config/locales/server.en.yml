@@ -12,6 +12,7 @@ en:
     first_reply_of_day_score_value: "The value of the point awarded for the first reply a user posts each day"
     flag_created_score_value: "The value of the point awarded when a user flags a post and that flag is accepted by a staff user"
     day_visited_score_value: "The value of the point awarded for every day a user visits the site"
+    day_visited_score_reason: "Identifier used when awarding points for daily check-in"
     scorable_categories: "List of categories where actions will generate points. Leave empty to enable points on all categories"
     reaction_received_score_value: "The value of the point awarded when a user receives a reaction"
     reaction_given_score_value: "The value of the point awarded for every reaction a user gives"

@@ -17,6 +17,7 @@ de:
     post_created_score_value: "Der Wert des Beifalls, der vergeben wird, wenn ein Benutzer einen Beitrag erstellt"
     flag_created_score_value: "Der Wert des Beifalls, der vergeben wird, wenn ein Benutzer einen Beitrag meldet und diese Meldung von einem Team-Benutzer akzeptiert wird"
     day_visited_score_value: "Der Wert des Beifalls, der für jeden Tag vergeben wird, an dem ein Benutzer die Website besucht"
+    day_visited_score_reason: "Identifier used when awarding points for daily check-in"
     scorable_categories: "Liste der Kategorien, in denen Aktionen Beifall erzeugen. Leer lassen, um Beifall für alle Kategorien zu aktivieren"
     reaction_received_score_value: "Der Wert des Beifalls, der vergeben wird, wenn ein Benutzer eine Reaktion erhält"
     reaction_given_score_value: "Der Wert des Beifalls, der für jede Reaktion vergeben wird, die ein Benutzer gibt"
