@@ -17,6 +17,7 @@ fi:
     post_created_score_value: "Annetun hurrauksen arvo, kun käyttäjä luo viestin"
     flag_created_score_value: "Annetun hurrauksen arvo, kun käyttäjä liputtaa viestin, ja henkilökunnan käyttäjä hyväksyy lipun"
     day_visited_score_value: "Annetun hurrauksen arvo jokaisesta päivästä, jona käyttäjä vierailee sivustolla"
+    day_visited_score_reason: "Identifier used when awarding points for daily check-in"
     scorable_categories: "Luettelo alueista, joilla toiminta luo hurrauksia. Hurraukset ovat käytössä kaikilla alueilla, jos jätät tämän tyhjäksi."
     reaction_received_score_value: "Annetun hurrauksen arvo, kun käyttäjä saa reaktion"
     reaction_given_score_value: "Annetun hurrauksen arvo jokaisesta käyttäjän antamasta reaktiosta"

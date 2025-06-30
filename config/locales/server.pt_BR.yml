@@ -17,6 +17,7 @@ pt_BR:
     post_created_score_value: "O valor da saudação concedida quando um usuário cria uma postagem"
     flag_created_score_value: "O valor da saudação concedida quando um usuário sinaliza uma postagem e essa sinalização é aceita por um usuário da equipe"
     day_visited_score_value: "O valor da saudação concedida para cada dia que um usuário visita o site"
+    day_visited_score_reason: "Identifier used when awarding points for daily check-in"
     scorable_categories: "Lista de categorias em que as ações vão gerar saudações. Deixe em branco para ativar saudações em todas as categorias"
     reaction_received_score_value: "O valor da saudação concedida quando um(a) usuário(a) recebe uma reação"
     reaction_given_score_value: "O valor da saudação concedida por cada reação feita por um(a) usuário(a)"
