@@ -117,4 +117,63 @@ after_initialize do
   on(:merging_users) do |source_user, target_user|
     DiscourseGamification::GamificationScore.merge_scores(source_user, target_user)
   end
+
+  on(:post_created) do |post, opts, user|
+    next if post.post_type != Post.types[:regular]
+    next if post.post_number == 1
+    next if post.hidden? || post.wiki || post.deleted_at
+
+    if DiscourseGamification::PostCreated.enabled?
+      DiscourseGamification::GamificationScoreEvent.record!(
+        user_id: user.id,
+        date: post.created_at.to_date,
+        points: DiscourseGamification::PostCreated.score_multiplier,
+        description: "post_created"
+      )
+    end
+  end
+
+  on(:post_action_created) do |post_action|
+    next unless post_action.post_action_type_id == PostActionType.types[:like]
+
+    if DiscourseGamification::LikeGiven.enabled?
+      DiscourseGamification::GamificationScoreEvent.record!(
+        user_id: post_action.user_id,
+        date: post_action.created_at.to_date,
+        points: DiscourseGamification::LikeGiven.score_multiplier,
+        description: "like_given"
+      )
+    end
+
+    if DiscourseGamification::LikeReceived.enabled?
+      DiscourseGamification::GamificationScoreEvent.record!(
+        user_id: post_action.post.user_id,
+        date: post_action.created_at.to_date,
+        points: DiscourseGamification::LikeReceived.score_multiplier,
+        description: "like_received"
+      )
+    end
+  end
+
+  on(:post_action_destroyed) do |post_action, undone|
+    next unless post_action.post_action_type_id == PostActionType.types[:like]
+
+    if DiscourseGamification::LikeGiven.enabled?
+      DiscourseGamification::GamificationScoreEvent.record!(
+        user_id: post_action.user_id,
+        date: post_action.created_at.to_date,
+        points: -DiscourseGamification::LikeGiven.score_multiplier,
+        description: "like_removed"
+      )
+    end
+
+    if DiscourseGamification::LikeReceived.enabled?
+      DiscourseGamification::GamificationScoreEvent.record!(
+        user_id: post_action.post.user_id,
+        date: post_action.created_at.to_date,
+        points: -DiscourseGamification::LikeReceived.score_multiplier,
+        description: "like_removed"
+      )
+    end
+  end
 end

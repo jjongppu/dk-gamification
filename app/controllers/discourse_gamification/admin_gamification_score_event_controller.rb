@@ -20,19 +20,14 @@ class DiscourseGamification::AdminGamificationScoreEventController < Admin::Admi
     params.require(%i[user_id date points])
     params.permit(:description)
 
-    event =
-      DiscourseGamification::GamificationScoreEvent.new(
-        user_id: params[:user_id],
-        date: params[:date],
-        points: params[:points],
-        description: params[:description],
-      )
+    event = DiscourseGamification::GamificationScoreEvent.record!(
+      user_id: params[:user_id],
+      date: params[:date],
+      points: params[:points],
+      description: params[:description],
+    )
 
-    if event.save
-      render_serialized(event, AdminGamificationScoreEventSerializer, root: false)
-    else
-      render_json_error(event)
-    end
+    render_serialized(event, AdminGamificationScoreEventSerializer, root: false)
   end
 
   def update
@@ -42,9 +37,7 @@ class DiscourseGamification::AdminGamificationScoreEventController < Admin::Admi
     event = DiscourseGamification::GamificationScoreEvent.find(params[:id])
     raise Discourse::NotFound unless event
 
-    event.update(points: params[:points], description: params[:description] || event.description)
-
-    if event.save
+    if event.update(points: params[:points], description: params[:description] || event.description)
       render json: success_json
     else
       render_json_error(event)
