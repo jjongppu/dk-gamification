@@ -19,18 +19,18 @@ module ::DiscourseGamification
     private
 
     def increment_score
-      GamificationScore.adjust_score(user_id: user_id, date: date, points: points)
+      GamificationScore.adjust_score(user_id: user_id, points: points)
     end
 
     def update_score
       diff = points - points_before_last_save
       return if diff == 0
 
-      GamificationScore.adjust_score(user_id: user_id, date: date, points: diff)
+      GamificationScore.adjust_score(user_id: user_id, points: diff)
     end
 
     def decrement_score
-      GamificationScore.adjust_score(user_id: user_id, date: date, points: -points)
+      GamificationScore.adjust_score(user_id: user_id, points: -points)
     end
   end
 end
