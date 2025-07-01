@@ -127,16 +127,27 @@ after_initialize do
     next if post.post_type != Post.types[:regular]
     next if post.post_number == 1
     next if post.hidden? || post.wiki || post.deleted_at
-
+  
     if DiscourseGamification::PostCreated.enabled?
-      DiscourseGamification::GamificationScoreEvent.record!(
+      # 최초 댓글 여부 확인
+      already_exists = DiscourseGamification::GamificationScoreEvent.exists?(
         user_id: user.id,
         date: post.created_at.to_date,
-        points: DiscourseGamification::PostCreated.score_multiplier,
-        reason: "post_created"
+        reason: "daily_first_reply"
       )
+  
+      if !already_exists
+        DiscourseGamification::GamificationScoreEvent.record!(
+          user_id: user.id,
+          date: post.created_at.to_date,
+          points: 10,
+          reason: "daily_first_reply",
+          description: "하루 최초 댓글"
+        )
+      end
     end
   end
+  
 
   on(:post_action_created) do |post_action|
     next unless post_action.post_action_type_id == PostActionType.types[:like]
