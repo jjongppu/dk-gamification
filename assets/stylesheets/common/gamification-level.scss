@@ -1,0 +1,22 @@
+.user-level-bar {
+    margin: 0.5em 0;
+  
+    .level-label {
+      font-size: 0.9em;
+      margin-bottom: 0.3em;
+    }
+  
+    .level-bar-outer {
+      width: 100%;
+      height: 10px;
+      background: #eee;
+      border-radius: 5px;
+      overflow: hidden;
+  
+      .level-bar-inner {
+        height: 100%;
+        transition: width 0.3s ease;
+      }
+    }
+  }
+  

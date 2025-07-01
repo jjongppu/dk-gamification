@@ -17,6 +17,7 @@ register_asset "stylesheets/common/leaderboard-info-modal.scss"
 register_asset "stylesheets/common/leaderboard-minimal.scss"
 register_asset "stylesheets/common/leaderboard-admin.scss"
 register_asset "stylesheets/common/gamification-score.scss"
+register_asset "stylesheets/common/gamification-level.scss"
 
 register_svg_icon "crown"
 register_svg_icon "award"
@@ -100,6 +101,12 @@ after_initialize do
   end
 
   add_to_serializer(:user_card, :gamification_score) { object.gamification_score }
+
+  add_to_serializer(:user_card, :gamification_level_info) do
+    DiscourseGamification::LevelHelper.progress_for(object.id)
+  end
+  
+
   add_to_serializer(:site, :default_gamification_leaderboard_id) do
     DiscourseGamification::GamificationLeaderboard.first&.id
   end
