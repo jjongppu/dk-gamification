@@ -5,6 +5,11 @@ class DiscourseGamification::CheckInsController < ApplicationController
   before_action :ensure_logged_in
 
   def create
+    unless SiteSetting.score_day_visited_enabled
+      render json: { points_awarded: false, points: 0 }
+      return
+    end
+
     today = Date.current
     reason = SiteSetting.day_visited_score_reason
 

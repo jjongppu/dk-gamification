@@ -15,4 +15,12 @@ RSpec.describe DiscourseGamification::CheckInsController do
     post "/gamification/check-in.json"
     expect(response.parsed_body["points_awarded"]).to eq(false)
   end
+
+  it "does not award points when disabled" do
+    sign_in(user)
+    SiteSetting.score_day_visited_enabled = false
+
+    post "/gamification/check-in.json"
+    expect(response.parsed_body["points_awarded"]).to eq(false)
+  end
 end

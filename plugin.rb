@@ -127,20 +127,19 @@ after_initialize do
     next if post.post_type != Post.types[:regular]
     next if post.post_number == 1
     next if post.hidden? || post.wiki || post.deleted_at
-  
-    if DiscourseGamification::PostCreated.enabled?
-      # 최초 댓글 여부 확인
+
+    if SiteSetting.score_first_reply_of_day_enabled
       already_exists = DiscourseGamification::GamificationScoreEvent.exists?(
         user_id: user.id,
         date: post.created_at.to_date,
         reason: "daily_first_reply"
       )
-  
+
       if !already_exists
         DiscourseGamification::GamificationScoreEvent.record!(
           user_id: user.id,
           date: post.created_at.to_date,
-          points: 10,
+          points: SiteSetting.first_reply_of_day_score_value,
           reason: "daily_first_reply",
           description: "하루 최초 댓글"
         )
