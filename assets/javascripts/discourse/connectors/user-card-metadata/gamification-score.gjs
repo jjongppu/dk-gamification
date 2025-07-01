@@ -1,6 +1,7 @@
 import Component from "@ember/component";
 import { classNames, tagName } from "@ember-decorators/component";
 import { computed } from "@ember/object";
+import { hbs } from "ember-cli-htmlbars";
 import { i18n } from "discourse-i18n";
 import GamificationScore from "../../components/gamification-score";
 
@@ -14,7 +15,7 @@ export default class GamificationScoreConnector extends Component {
     return `width: ${info.exp_percent}%; background: #f8c100`;
   }
 
-  <template>
+  static template = hbs`
     {{#if this.user.gamification_score}}
       <span class="desc">{{i18n "gamification.score"}} </span>
       <span><GamificationScore @model={{this.user}} /></span>
@@ -30,5 +31,5 @@ export default class GamificationScoreConnector extends Component {
         </div>
       </div>
     {{/if}}
-  </template>
+  `;
 }
