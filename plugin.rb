@@ -68,6 +68,9 @@ after_initialize do
   require_relative "lib/discourse_gamification/leaderboard_cached_view"
   require_relative "lib/discourse_gamification/first_login_rewarder"
 
+  require_dependency 'discourse_gamification/level_helper'
+
+
   reloadable_patch do |plugin|
     User.prepend(DiscourseGamification::UserExtension)
     Guardian.include(DiscourseGamification::GuardianExtension)
