@@ -1,22 +1,19 @@
+.gamification-meta-box {
+  margin-top: 5px;
+}
+
 .user-level-bar {
-    margin: 0.5em 0;
-  
-    .level-label {
-      font-size: 0.9em;
-      margin-bottom: 0.3em;
-    }
-  
-    .level-bar-outer {
-      width: 100%;
-      height: 10px;
-      background: #eee;
-      border-radius: 5px;
-      overflow: hidden;
-  
-      .level-bar-inner {
-        height: 100%;
-        transition: width 0.3s ease;
-      }
-    }
-  }
-  
+  margin-top: 4px;
+  background: #eee;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.level-bar-outer {
+  height: 8px;
+}
+
+.level-bar-inner {
+  height: 8px;
+  transition: width 0.3s;
+}
