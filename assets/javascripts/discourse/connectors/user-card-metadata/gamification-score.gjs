@@ -21,6 +21,8 @@ export default class GamificationScoreConnector extends Component {
       <span><GamificationScore @model={{this.user}} /></span>
     {{/if}}
 
+    test
+
     {{#if this.user.gamification_level_info}}
       <div class="user-level-bar">
         <div class="level-label">
