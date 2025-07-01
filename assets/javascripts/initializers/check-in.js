@@ -9,9 +9,17 @@ export default {
       if (!api.getCurrentUser()) {
         return;
       }
+
+      if (!api.container.lookup("site-settings:main").score_day_visited_enabled) {
+        return;
+      }
+
       ajax("/gamification/check-in.json").then((result) => {
         if (result.points_awarded) {
-          api.addFlash(I18n.t("gamification.check_in_awarded", { points: result.points }), "success");
+          api.addFlash(
+            I18n.t("gamification.check_in_awarded", { points: result.points }),
+            "success",
+          );
         }
       });
     });

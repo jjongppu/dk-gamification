@@ -22,8 +22,7 @@ discourse_gamification:
   topic_created_score_value:
     default: 5
 
-  # ✅ 추가된 항목
-  score_post_created_enabled:
+  score_first_reply_of_day_enabled:
     default: true
     client: true
 
@@ -36,6 +35,9 @@ discourse_gamification:
     default: 10
   day_visited_score_value:
     default: 1
+  score_day_visited_enabled:
+    default: true
+    client: true
   day_visited_score_reason:
     default: "day_visited"
   reaction_received_score_value:
