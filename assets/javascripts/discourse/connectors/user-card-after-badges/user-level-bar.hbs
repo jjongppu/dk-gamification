@@ -1,3 +1,7 @@
+{{#if user.badges}}
+  {{user-badges badges=user.badges}}
+{{/if}}
+
 <div class="user-level-bar">
   <div class="level-label">LV.{{user.gamification_level_info.level}} {{user.gamification_level_info.name}}</div>
   <div class="level-bar-outer">
