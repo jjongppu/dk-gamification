@@ -23,7 +23,7 @@ export default class GamificationLevelDisplay extends Component {
 
       <div class="level-info-box">
         <div class="level-icon">
-          <img src={{this.user.gamification_level_info.image_url}}
+          <img src={{this.user.gamification_level_info.image_url}} />
         </div>
 
         <div class="user-level-bar">
