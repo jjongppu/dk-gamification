@@ -20,16 +20,21 @@ export default class GamificationLevelDisplay extends Component {
 
   <template>
     {{#if this.user.gamification_level_info}}
-      <div class="user-level-bar">
+
+      <div class="level-info-box">
         <div class="level-icon">
           <img src={{this.user.gamification_level_info.image_url}}
         </div>
-        <div class="level-label">
-          LV.{{this.user.gamification_level_info.level}} {{this.user.gamification_level_info.name}} 
-          {{this.levelProgressPercent}}%
-        </div>
-        <div class="level-bar-outer">
-          <div class="level-bar-inner" style={{this.levelBarStyle}}></div>
+
+        <div class="user-level-bar">
+          
+          <div class="level-label">
+            {{this.user.gamification_level_info.name}} LV.{{this.user.gamification_level_info.level}} 
+            {{this.levelProgressPercent}}%
+          </div>
+          <div class="level-bar-outer">
+            <div class="level-bar-inner" style={{this.levelBarStyle}}></div>
+          </div>
         </div>
       </div>
     {{/if}}

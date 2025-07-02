@@ -7,6 +7,7 @@
   background: #eee;
   border-radius: 5px;
   overflow: hidden;
+  width: 100%;
 }
 
 .level-bar-outer {
@@ -22,12 +23,11 @@
   width: 100%;
 }
 
-.level-icon{
-  height: 16px;
-  width: 16px;
+.level-info-box{
+  display: flex;
 }
 
-.level-icon img{
-  height: 100%;
-  width: 100%;
+.level-icon, .level-icon img{
+  height: 32px;
+  width: 32px;
 }
