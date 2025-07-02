@@ -71,7 +71,8 @@ after_initialize do
 
   require_dependency 'discourse_gamification/level_helper'
 
-
+  DiscourseGamification::UserLevelSerializerExtension.register!
+  
   reloadable_patch do |plugin|
     User.prepend(DiscourseGamification::UserExtension)
     Guardian.include(DiscourseGamification::GuardianExtension)
@@ -119,6 +120,7 @@ after_initialize do
     DiscourseGamification::GamificationLeaderboard.first&.id
   end
 
+  
   SeedFu.fixture_paths << Rails
     .root
     .join("plugins", "discourse-gamification", "db", "fixtures")
