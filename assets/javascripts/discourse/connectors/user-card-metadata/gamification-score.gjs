@@ -8,7 +8,7 @@ import GamificationScore from "../../components/gamification-score";
 export default class GamificationScoreConnector extends Component {
   <template>
     {{#if this.user.gamification_score}}
-      <span class="desc">{{i18n "gamification.score"}} </span>
+      <span class="desc">누적{{i18n "gamification.score"}} </span>
       <span><GamificationScore @model={{this.user}} /></span>
     {{/if}}
   </template>
