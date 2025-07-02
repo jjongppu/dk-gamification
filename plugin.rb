@@ -121,11 +121,11 @@ after_initialize do
   end
 
   add_to_serializer(:user_summary, :user_level_image_url) do
-    DiscourseGamification::LevelHelper.image_for(object.id)
+    DiscourseGamification::LevelHelper.progress_for(object.id)&.[](:image_url)
   end
-
+  
   add_to_serializer(:basic_user, :user_level_image_url) do
-    DiscourseGamification::LevelHelper.image_for(object.id)
+    DiscourseGamification::LevelHelper.progress_for(object.id)&.[](:image_url)
   end
   
   SeedFu.fixture_paths << Rails
