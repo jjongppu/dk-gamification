@@ -67,8 +67,8 @@ after_initialize do
   require_relative "lib/discourse_gamification/recalculate_scores_rate_limiter"
   require_relative "lib/discourse_gamification/leaderboard_cached_view"
   require_relative "lib/discourse_gamification/first_login_rewarder"
-  require_relative "lib/user_level_serializer_extension"
-  
+  require_relative "lib/discourse_gamification/user_level_serializer_extension"
+
   require_dependency 'discourse_gamification/level_helper'
 
 
