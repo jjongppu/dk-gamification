@@ -4,17 +4,6 @@ module DiscourseGamification
     class LevelHelper
 
       # plugins/discourse-gamification/lib/discourse_gamification/level_helper.rb
-
-      def self.progress_for(user_id)
-        level = get_level(user_id) # 너가 사용하는 레벨 계산 메서드
-        {
-          level: level,
-          name: level_name(level),
-          progress: calculate_progress(user_id),
-          image_url: "https://your-cdn.com/level_icons/level_#{level}.png"
-        }
-      end
-
       def self.progress_for(user_id)
         score = GamificationScore.find_by(user_id: user_id)&.score || 0
         level_info = GamificationLevelInfo.where(":score BETWEEN min_score AND max_score", score: score).first

@@ -72,7 +72,7 @@ after_initialize do
   require_dependency 'discourse_gamification/level_helper'
 
   DiscourseGamification::UserLevelSerializerExtension.register!
-  
+
   reloadable_patch do |plugin|
     User.prepend(DiscourseGamification::UserExtension)
     Guardian.include(DiscourseGamification::GuardianExtension)
@@ -120,6 +120,13 @@ after_initialize do
     DiscourseGamification::GamificationLeaderboard.first&.id
   end
 
+  add_to_serializer(:user_summary, :user_level_image_url) do
+    DiscourseGamification::LevelHelper.image_for(object.id)
+  end
+
+  add_to_serializer(:basic_user, :user_level_image_url) do
+    DiscourseGamification::LevelHelper.image_for(object.id)
+  end
   
   SeedFu.fixture_paths << Rails
     .root
