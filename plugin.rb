@@ -125,23 +125,23 @@ after_initialize do
     DiscourseGamification::GamificationLeaderboard.first&.id
   end
 
-  add_to_serializer(:user_summary, :user_level_info) do
+  add_to_serializer(:user, :user_level_info) do
     begin
       object&.id ? DiscourseGamification::LevelHelper.progress_for(object.id) : nil
     rescue => e
-      Rails.logger.error("Gamification Level Error (user_summary): #{e.message}")
+      Rails.logger.error("Gamification Level Error (user): #{e.message}")
       nil
     end
   end
   
-  add_to_serializer(:basic_user, :user_level_info) do
-    begin
-      object&.id ? DiscourseGamification::LevelHelper.progress_for(object.id) : nil
-    rescue => e
-      Rails.logger.error("Gamification Level Error (basic_user): #{e.message}")
-      nil
-    end
-  end
+  # add_to_serializer(:basic_user, :user_level_info) do
+  #   begin
+  #     object&.id ? DiscourseGamification::LevelHelper.progress_for(object.id) : nil
+  #   rescue => e
+  #     Rails.logger.error("Gamification Level Error (basic_user): #{e.message}")
+  #     nil
+  #   end
+  # end
   
   
   SeedFu.fixture_paths << Rails
