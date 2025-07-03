@@ -125,7 +125,7 @@ after_initialize do
     DiscourseGamification::GamificationLeaderboard.first&.id
   end
 
-  add_to_serializer(:user, :user_level_info) do
+  add_to_serializer(:user, :gamification_level_info) do
     begin
       object&.id ? DiscourseGamification::LevelHelper.progress_for(object.id) : nil
     rescue => e
@@ -134,7 +134,7 @@ after_initialize do
     end
   end
   
-  add_to_serializer(:basic_user, :user_level_info) do
+  add_to_serializer(:basic_user, :gamification_level_info) do
     begin
       object&.id ? DiscourseGamification::LevelHelper.progress_for(object.id) : nil
     rescue => e
