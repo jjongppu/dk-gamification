@@ -20,7 +20,7 @@ export default {
         //   style: "color: #f8c100;"
         // }, `${levelInfo.name} LV.${levelInfo.level} ${Math.floor(levelInfo.progress_percent)}%`);
 
-        return helper.h("span", { style: "margin-left: 8px;" }, [image]);
+        return helper.h("span", { style: "" }, [image]);
       });
     });
   }
