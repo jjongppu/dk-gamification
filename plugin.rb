@@ -18,7 +18,6 @@ register_asset "stylesheets/common/leaderboard-minimal.scss"
 register_asset "stylesheets/common/leaderboard-admin.scss"
 register_asset "stylesheets/common/gamification-score.scss"
 register_asset "stylesheets/common/gamification-level.scss"
-register_asset "javascripts/initializers/add-user-level-text.js"
 
 register_svg_icon "crown"
 register_svg_icon "award"
