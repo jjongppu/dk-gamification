@@ -143,8 +143,6 @@ after_initialize do
     end
   end
   
-  
-  
   SeedFu.fixture_paths << Rails
     .root
     .join("plugins", "discourse-gamification", "db", "fixtures")
