@@ -127,11 +127,12 @@ after_initialize do
   
   add_to_serializer(:basic_user, :gamification_level_info) do
     begin
-      if object&.id
-        Rails.logger.warn("[🎯 basic_user] object.class=#{object.class}, object.id=#{object.id}")
-        DiscourseGamification::LevelHelper.progress_for(object.id)
+      id = object.respond_to?(:id) ? object.id : object[:id] || object["id"]
+      if id
+        Rails.logger.warn("[🎯 basic_user] object.class=#{object.class}, id=#{id}")
+        DiscourseGamification::LevelHelper.progress_for(id)
       else
-        Rails.logger.warn("[🎯 basic_user] object is nil or has no id!")
+        Rails.logger.warn("[🎯 basic_user] object has no id")
         nil
       end
     rescue => e
@@ -139,6 +140,7 @@ after_initialize do
       nil
     end
   end
+  
   
   
   add_to_serializer(:user_card, :gamification_level_info) do
