@@ -71,7 +71,11 @@ after_initialize do
 
   require_dependency 'discourse_gamification/level_helper'
 
-  # DiscourseGamification::UserLevelSerializerExtension.register!
+  begin
+    DiscourseGamification::UserLevelSerializerExtension.register!
+  rescue => e
+    Rails.logger.error("Gamification Serializer Registration Error: #{e.message}")
+  end
 
   reloadable_patch do |plugin|
     User.prepend(DiscourseGamification::UserExtension)
@@ -120,13 +124,24 @@ after_initialize do
     DiscourseGamification::GamificationLeaderboard.first&.id
   end
 
-  # add_to_serializer(:user_summary, :user_level_info) do
-  #   object.id ? DiscourseGamification::LevelHelper.progress_for(object.id) : nil
-  # end
+  add_to_serializer(:user_summary, :user_level_info) do
+    begin
+      object&.id ? DiscourseGamification::LevelHelper.progress_for(object.id) : nil
+    rescue => e
+      Rails.logger.error("Gamification Level Error (user_summary): #{e.message}")
+      nil
+    end
+  end
   
-  # add_to_serializer(:basic_user, :user_level_info) do
-  #   object.id ? DiscourseGamification::LevelHelper.progress_for(object.id) : nil
-  # end
+  add_to_serializer(:basic_user, :user_level_info) do
+    begin
+      object&.id ? DiscourseGamification::LevelHelper.progress_for(object.id) : nil
+    rescue => e
+      Rails.logger.error("Gamification Level Error (basic_user): #{e.message}")
+      nil
+    end
+  end
+  
   
   SeedFu.fixture_paths << Rails
     .root
