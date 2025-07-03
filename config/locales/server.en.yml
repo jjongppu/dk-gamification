@@ -4,6 +4,7 @@ en:
     like_received_score_value: "The value of the point awarded when a user receives a like"
     like_given_score_value: "The value of the point awarded for every like a user gives"
     solution_score_value: "The value of the point awarded when a user's post is marked as a solution"
+    solution_topic_score_value: "The value of the point awarded to a topic author when a reply is accepted"
     user_invited_score_value: "The value of the point awarded when a user has an invite redeemed"
     time_read_score_value: "The value of the point awarded for every hour of time spent reading"
     post_read_score_value: "The value of the point awarded for every one hundred posts a user reads"

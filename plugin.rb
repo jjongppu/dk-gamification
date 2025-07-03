@@ -56,6 +56,7 @@ after_initialize do
   require_relative "lib/discourse_gamification/scorables/first_reply_of_day"
   require_relative "lib/discourse_gamification/scorables/post_read"
   require_relative "lib/discourse_gamification/scorables/solutions"
+  require_relative "lib/discourse_gamification/scorables/solution_topic"
   require_relative "lib/discourse_gamification/scorables/time_read"
   require_relative "lib/discourse_gamification/scorables/topic_created"
   require_relative "lib/discourse_gamification/scorables/user_invited"
@@ -165,7 +166,17 @@ after_initialize do
 
   on(:post_created) do |post, opts, user|
     next if post.post_type != Post.types[:regular]
-    next if post.post_number == 1
+    if post.post_number == 1
+      next if post.hidden? || post.wiki || post.deleted_at
+
+      DiscourseGamification::GamificationScoreEvent.record!(
+        user_id: user.id,
+        date: post.created_at.to_date,
+        points: SiteSetting.topic_created_score_value,
+        reason: "topic_created",
+      )
+      next
+    end
     next if post.hidden? || post.wiki || post.deleted_at
 
     if SiteSetting.score_first_reply_of_day_enabled
@@ -228,6 +239,46 @@ after_initialize do
         date: post_action.created_at.to_date,
         points: -DiscourseGamification::LikeReceived.score_multiplier,
         reason: "like_removed"
+      )
+    end
+  end
+
+  on(:accepted_solution) do |post|
+    if DiscourseGamification::Solutions.enabled?
+      DiscourseGamification::GamificationScoreEvent.record!(
+        user_id: post.user_id,
+        date: Time.zone.now.to_date,
+        points: DiscourseGamification::Solutions.score_multiplier,
+        reason: "accepted_solution",
+      )
+    end
+
+    if DiscourseGamification::SolutionTopic.enabled?
+      DiscourseGamification::GamificationScoreEvent.record!(
+        user_id: post.topic.user_id,
+        date: Time.zone.now.to_date,
+        points: DiscourseGamification::SolutionTopic.score_multiplier,
+        reason: "accepted_solution_topic",
+      )
+    end
+  end
+
+  on(:unaccepted_solution) do |post|
+    if DiscourseGamification::Solutions.enabled?
+      DiscourseGamification::GamificationScoreEvent.record!(
+        user_id: post.user_id,
+        date: Time.zone.now.to_date,
+        points: -DiscourseGamification::Solutions.score_multiplier,
+        reason: "accepted_solution_removed",
+      )
+    end
+
+    if DiscourseGamification::SolutionTopic.enabled?
+      DiscourseGamification::GamificationScoreEvent.record!(
+        user_id: post.topic.user_id,
+        date: Time.zone.now.to_date,
+        points: -DiscourseGamification::SolutionTopic.score_multiplier,
+        reason: "accepted_solution_topic_removed",
       )
     end
   end

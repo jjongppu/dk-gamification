@@ -10,6 +10,7 @@ ko:
     like_received_score_value: "사용자가 좋아요를 받으면 부여되는 포인트 값"
     like_given_score_value: "사용자가 좋아요를 할 때마다 부여되는 포인트 값"
     solution_score_value: "사용자의 게시물이 해결책으로 선택되면 부여되는 포인트 값"
+    solution_topic_score_value: "답변이 채택될 때 게시글 작성자에게 부여되는 포인트 값"
     user_invited_score_value: "초대가 수락될 때 부여되는 포인트 값"
     time_read_score_value: "읽은 시간 한 시간마다 부여되는 포인트 값"
     post_read_score_value: "100개의 게시글을 읽을 때마다 부여되는 포인트 값"

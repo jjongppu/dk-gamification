@@ -12,7 +12,9 @@ discourse_gamification:
   like_given_score_value:
     default: 1
   solution_score_value:
-    default: 10
+    default: 5
+  solution_topic_score_value:
+    default: 2
   user_invited_score_value:
     default: 10
   time_read_score_value:
@@ -20,7 +22,7 @@ discourse_gamification:
   post_read_score_value:
     default: 1
   topic_created_score_value:
-    default: 5
+    default: 1
 
   score_first_reply_of_day_enabled:
     default: true
