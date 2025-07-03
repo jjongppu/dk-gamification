@@ -141,6 +141,17 @@ after_initialize do
     end
   end
   
+  add_to_serializer(:post, :user, include: true) do
+    user = object.user
+  
+    # `gamification_level_info` 필드를 강제로 user 객체에 심어주기
+    user.define_singleton_method(:gamification_level_info) do
+      DiscourseGamification::LevelHelper.progress_for(user.id)
+    end
+  
+    BasicUserSerializer.new(user, scope: scope, root: false)
+  end
+  
   
   
   add_to_serializer(:user_card, :gamification_level_info) do
