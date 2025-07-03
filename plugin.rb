@@ -121,11 +121,11 @@ after_initialize do
   end
 
   add_to_serializer(:user_summary, :user_level_info) do
-    DiscourseGamification::LevelHelper.progress_for(object.id)
+    object.id ? DiscourseGamification::LevelHelper.progress_for(object.id) : nil
   end
   
   add_to_serializer(:basic_user, :user_level_info) do
-    DiscourseGamification::LevelHelper.progress_for(object.id)
+    object.id ? DiscourseGamification::LevelHelper.progress_for(object.id) : nil
   end
   
   SeedFu.fixture_paths << Rails

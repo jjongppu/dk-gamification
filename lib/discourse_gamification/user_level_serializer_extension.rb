@@ -7,6 +7,7 @@ module DiscourseGamification
         attributes :gamification_level_info, :user_level_image_url
 
         def gamification_level_info
+          return nil unless object&.id
           DiscourseGamification::LevelHelper.progress_for(object.id)
         rescue => e
           Rails.logger.error("Gamification Level Error: #{e.message}")
@@ -14,6 +15,7 @@ module DiscourseGamification
         end
 
         def user_level_image_url
+          return nil unless object&.id
           info = DiscourseGamification::LevelHelper.progress_for(object.id)
           info[:image_url] if info
         rescue => e
@@ -26,6 +28,7 @@ module DiscourseGamification
         attributes :gamification_level_info, :user_level_image_url
 
         def gamification_level_info
+          return nil unless object&.user_id
           DiscourseGamification::LevelHelper.progress_for(object.user_id)
         rescue => e
           Rails.logger.error("Gamification Level Error: #{e.message}")
@@ -33,6 +36,7 @@ module DiscourseGamification
         end
 
         def user_level_image_url
+          return nil unless object&.user_id
           info = DiscourseGamification::LevelHelper.progress_for(object.user_id)
           info[:image_url] if info
         rescue => e
