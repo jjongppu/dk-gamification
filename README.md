@@ -32,6 +32,7 @@ Default score settings include:
 | `first_reply_of_day_score_value` | 1 |
 | `flag_created_score_value` | 10 |
 | `day_visited_score_value` | 1 |
+| `day_visited_weekend_score_value` | 20 |
 | `reaction_received_score_value` | 1 |
 | `reaction_given_score_value` | 1 |
 | `chat_reaction_received_score_value` | 1 |

@@ -20,6 +20,7 @@ ko:
     first_reply_of_day_score_value: "사용자가 하루에 처음 작성한 댓글에 부여되는 포인트 값"
     flag_created_score_value: "사용자가 게시글을 신고하고 스태프가 승인하면 부여되는 포인트 값"
     day_visited_score_value: "사용자가 사이트를 방문한 날마다 부여되는 포인트 값"
+    day_visited_weekend_score_value: "사용자가 주말에 사이트를 방문하면 부여되는 포인트 값"
     score_day_visited_enabled: "사용자 일일 방문 포인트 부여 활성화"
     day_visited_score_reason: "Identifier used when awarding points for daily check-in"
     scorable_categories: "포인트가 부여될 카테고리 목록입니다. 비워두면 모든 카테고리에서 포인트가 부여됩니다"

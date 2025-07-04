@@ -223,6 +223,26 @@ RSpec.describe ::DiscourseGamification::DayVisited do
     # thirty days visited
     let(:expected_score) { 30 }
   end
+
+  it "uses weekend score value" do
+    user = Fabricate(:user)
+    Fabricate(:gamification_leaderboard)
+    SiteSetting.day_visited_weekend_score_value = 20
+    SiteSetting.day_visited_score_value = 1
+    (Date.new(2022, 1, 1)..Date.new(2022, 1, 7)).each do |date|
+      UserVisit.create(user_id: user.id, visited_at: date)
+    end
+
+    DiscourseGamification::GamificationScore.calculate_scores(
+      since_date: "2022-1-1",
+      only_subclass: described_class,
+    )
+
+    DiscourseGamification::LeaderboardCachedView.create_all
+
+    # Weekend days are Jan 1 (Sat) and Jan 2 (Sun)
+    expect(user.gamification_score).to eq(20 * 2 + 1 * 5)
+  end
 end
 
 RSpec.describe ::DiscourseGamification::PostRead do
