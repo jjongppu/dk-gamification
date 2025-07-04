@@ -121,6 +121,17 @@ after_initialize do
     DiscourseGamification::GamificationLeaderboard.first&.id
   end
 
+  # 1. 기본 유저 serializer 확장 (글쓴이용)
+  add_to_serializer(:basic_user, :gamification_level_info, include_condition: -> { true }) do
+    begin
+      DiscourseGamification::LevelHelper.progress_for(object.id)
+    rescue => e
+      Rails.logger.error("Gamification Level Error (basic_user): #{e.message}")
+      nil
+    end
+  end
+
+  # 2. 현재 로그인한 사용자 serializer 확장
   add_to_serializer(:user, :gamification_level_info, include_condition: -> { true }) do
     begin
       DiscourseGamification::LevelHelper.progress_for(object.id)
@@ -129,31 +140,10 @@ after_initialize do
       nil
     end
   end
-  
-  
-  add_to_serializer(:basic_user, :gamification_level_info, include_condition: -> { true }) do
-    begin
-      id = object.respond_to?(:id) ? object.id : object[:id] || object["id"]
-      if id
-        DiscourseGamification::LevelHelper.progress_for(id)
-      else
-        nil
-      end
-    rescue => e
-      Rails.logger.error("Gamification Level Error (basic_user): #{e.message}")
-      nil
-    end
-  end
-  
-  
-  add_to_serializer(:post, :user) do
-    user = object.user
-  
-    user.define_singleton_method(:gamification_level_info) do
-      DiscourseGamification::LevelHelper.progress_for(self.id)
-    end
-  
-    BasicUserSerializer.new(user, scope: scope, root: false)
+
+  # 3. Post에서 user 필드를 명시적으로 내려주되, 메서드 override는 제거
+  add_to_serializer(:post, :user, include: true) do
+    BasicUserSerializer.new(object.user, scope: scope, root: false)
   end
   
   

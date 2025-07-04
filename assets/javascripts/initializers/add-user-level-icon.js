@@ -8,7 +8,7 @@ export default {
       api.decorateWidget("poster-name:before", (helper) => {
         const user = helper.attrs.user;
         const levelInfo = user?.gamification_level_info;
-        console.log('gamification_level_info user image ::::');
+        console.log('gamification_level_info user image ::::', levelInfo);
         if (!levelInfo) return;
 
         const image = helper.h("img", {
