@@ -142,13 +142,11 @@ after_initialize do
   end
 
   # 3. Post에서 user 필드를 명시적으로 내려주되, 메서드 override는 제거
-  add_to_serializer(:post, :user, include: true) do
+  add_to_serializer(:post, :user, include_condition: -> { true }) do
     BasicUserSerializer.new(object.user, scope: scope, root: false)
   end
   
-  
-  
-  
+
   add_to_serializer(:user_card, :gamification_level_info) do
     begin
       DiscourseGamification::LevelHelper.progress_for(object.id)
