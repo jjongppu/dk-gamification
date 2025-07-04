@@ -7,6 +7,11 @@ discourse_gamification:
     type: category_list
     default: ""
 
+  ## Score value settings
+  score_value_settings:
+    type: header
+    default: ""
+
   like_received_score_value:
     default: 1
   like_given_score_value:
@@ -52,6 +57,13 @@ discourse_gamification:
     default: 1
   chat_message_created_score_value:
     default: 1
+
+  post_created_event_score_value:
+    default: 2
+  accepted_solution_event_score_value:
+    default: 5
+  accepted_solution_topic_event_score_value:
+    default: 2
 
   score_ranking_strategy:
     default: dense_rank
