@@ -173,10 +173,10 @@ after_initialize do
       elsif user.is_a?(Hash)
         id = user["id"] || user[:id]
         Rails.logger.warn("[⚠️ PostSerializer] user is a Hash for post_id=#{object.id}, id=#{id}")
-        BasicUserSerializer.new(OpenStruct.new(id: id), scope: scope, root: false)
+        BasicUserSerializer.new(OpenStruct.new(id: id), scope: scope, root: false).as_json
       elsif user.respond_to?(:id)
         Rails.logger.info("[✅ PostSerializer] Serializing User object with id=#{user.id} for post_id=#{object.id}")
-        BasicUserSerializer.new(user, scope: scope, root: false)
+        BasicUserSerializer.new(user, scope: scope, root: false).as_json
       else
         Rails.logger.error("[❌ PostSerializer] Unexpected user type for post_id=#{object.id}: #{user.class}")
         nil
@@ -186,6 +186,7 @@ after_initialize do
       nil
     end
   end
+  
   
   
 
