@@ -150,7 +150,11 @@ after_initialize do
       nil
     end
   end
-  
+    
+  # 🎯 출력 대상으로 명시적으로 추가
+  add_to_serializer(:basic_user, :attributes) do
+    super() + [:gamification_level_info]
+  end
   
 
   # 2. 현재 로그인한 사용자 serializer 확장
