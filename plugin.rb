@@ -167,29 +167,8 @@ after_initialize do
     end
   end
 
-  add_to_serializer(:post, :user, include_condition: -> { true }) do
-    begin
-      user = object.user
-  
-      if user.nil?
-        Rails.logger.warn("[⚠️ PostSerializer] user is nil for post_id=#{object.id}")
-        nil
-      elsif user.is_a?(Hash)
-        id = user["id"] || user[:id]
-        Rails.logger.warn("[⚠️ PostSerializer] user is a Hash for post_id=#{object.id}, id=#{id}")
-        BasicUserSerializer.new(OpenStruct.new(id: id), scope: scope, root: false).as_json
-      elsif user.respond_to?(:id)
-        Rails.logger.info("[✅ PostSerializer] Serializing User object with id=#{user.id} for post_id=#{object.id}")
-        BasicUserSerializer.new(user, scope: scope, root: false).as_json
-      else
-        Rails.logger.error("[❌ PostSerializer] Unexpected user type for post_id=#{object.id}: #{user.class}")
-        nil
-      end
-    rescue => e
-      Rails.logger.error("[❌ PostSerializer] Exception for post_id=#{object&.id}: #{e.message}")
-      nil
-    end
-  end
+  # Use the default PostSerializer user serialization which now includes the
+  # gamification_level_info via the BasicUser serializer extension.
   
   
   
