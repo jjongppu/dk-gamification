@@ -141,16 +141,11 @@ after_initialize do
     end
   end
 
-  # 3. Post serializer에서 user 필드를 명시적으로 내려주되, gamification_level_info 포함 강제
   add_to_serializer(:post, :user, include_condition: -> { true }) do
-    user = object.user
-
-    BasicUserSerializer.new(user, scope: scope, root: false).tap do |serializer|
-      serializer.define_singleton_method(:gamification_level_info) do
-        DiscourseGamification::LevelHelper.progress_for(user.id)
-      end
-    end
+    BasicUserSerializer.new(object.user, scope: scope, root: false)
   end
+  
+
 
 
   add_to_serializer(:user_card, :gamification_level_info) do
