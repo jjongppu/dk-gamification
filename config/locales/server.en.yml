@@ -23,6 +23,10 @@ en:
     chat_reaction_given_score_value: "The value of the point awarded for every reaction a user gives to a chat message"
     chat_message_created_score_value: "The value of the point awarded for every message a user sends in a chat"
     score_ranking_strategy: "Leaderboard position ranking strategy"
+    instant_event_category_filters: "Instant event category filters"
+    post_created_event_categories: "Categories where creating a post will award points immediately. Leave empty to apply to all"
+    accepted_solution_event_categories: "Categories where having a reply accepted will award points immediately. Leave empty to apply to all"
+    accepted_solution_topic_event_categories: "Categories where marking a reply as accepted will award points to the topic author. Leave empty to apply to all"
   score: "Points"
   default_leaderboard_name: "Global Leaderboard"
   rate_limiter:
