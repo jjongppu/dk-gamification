@@ -153,7 +153,7 @@ after_initialize do
     
   # 🎯 출력 대상으로 명시적으로 추가
   add_to_serializer(:basic_user, :attributes) do
-    super() + [:gamification_level_info]
+    (defined?(super) ? Array(super) : []) + [:gamification_level_info]
   end
   
 
