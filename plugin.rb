@@ -121,15 +121,29 @@ after_initialize do
     DiscourseGamification::GamificationLeaderboard.first&.id
   end
 
-  # 1. 기본 유저 serializer 확장 (글쓴이용)
+  # 1. 기본 유저 serializer 확장 (Post)
   add_to_serializer(:basic_user, :gamification_level_info, include_condition: -> { true }) do
     begin
-      DiscourseGamification::LevelHelper.progress_for(object.id)
+      id =
+        if object.respond_to?(:id)
+          object.id
+        elsif object.is_a?(Hash)
+          object["id"] || object[:id]
+        end
+  
+      Rails.logger.warn("[🎯 basic_user] extracted id: #{id}")
+  
+      if id
+        DiscourseGamification::LevelHelper.progress_for(id)
+      else
+        nil
+      end
     rescue => e
       Rails.logger.error("Gamification Level Error (basic_user): #{e.message}")
       nil
     end
   end
+  
 
   # 2. 현재 로그인한 사용자 serializer 확장
   add_to_serializer(:user, :gamification_level_info, include_condition: -> { true }) do
