@@ -211,12 +211,12 @@ after_initialize do
       end
     end
 
-    if DiscourseGamification::PostCreated.enabled? &&
+    if SiteSetting.post_created_event_score_value.to_i > 0 &&
          DiscourseGamification.category_allowed?(category_id, SiteSetting.post_created_event_categories)
       DiscourseGamification::GamificationScoreEvent.record!(
         user_id: user.id,
         date: post.created_at.to_date,
-        points: SiteSetting.post_created_score_value,
+        points: SiteSetting.post_created_event_score_value,
         reason: "post_created",
       )
     end
@@ -270,22 +270,22 @@ after_initialize do
   on(:accepted_solution) do |post|
     category_id = post.topic.category_id
 
-    if DiscourseGamification::Solutions.enabled? &&
+    if SiteSetting.accepted_solution_event_score_value.to_i > 0 &&
          DiscourseGamification.category_allowed?(category_id, SiteSetting.accepted_solution_event_categories)
       DiscourseGamification::GamificationScoreEvent.record!(
         user_id: post.user_id,
         date: Time.zone.now.to_date,
-        points: DiscourseGamification::Solutions.score_multiplier,
+        points: SiteSetting.accepted_solution_event_score_value,
         reason: "accepted_solution",
       )
     end
 
-    if DiscourseGamification::SolutionTopic.enabled? &&
+    if SiteSetting.accepted_solution_topic_event_score_value.to_i > 0 &&
          DiscourseGamification.category_allowed?(category_id, SiteSetting.accepted_solution_topic_event_categories)
       DiscourseGamification::GamificationScoreEvent.record!(
         user_id: post.topic.user_id,
         date: Time.zone.now.to_date,
-        points: DiscourseGamification::SolutionTopic.score_multiplier,
+        points: SiteSetting.accepted_solution_topic_event_score_value,
         reason: "accepted_solution_topic",
       )
     end
@@ -294,22 +294,22 @@ after_initialize do
   on(:unaccepted_solution) do |post|
     category_id = post.topic.category_id
 
-    if DiscourseGamification::Solutions.enabled? &&
+    if SiteSetting.accepted_solution_event_score_value.to_i > 0 &&
          DiscourseGamification.category_allowed?(category_id, SiteSetting.accepted_solution_event_categories)
       DiscourseGamification::GamificationScoreEvent.record!(
         user_id: post.user_id,
         date: Time.zone.now.to_date,
-        points: -DiscourseGamification::Solutions.score_multiplier,
+        points: -SiteSetting.accepted_solution_event_score_value,
         reason: "accepted_solution_removed",
       )
     end
 
-    if DiscourseGamification::SolutionTopic.enabled? &&
+    if SiteSetting.accepted_solution_topic_event_score_value.to_i > 0 &&
          DiscourseGamification.category_allowed?(category_id, SiteSetting.accepted_solution_topic_event_categories)
       DiscourseGamification::GamificationScoreEvent.record!(
         user_id: post.topic.user_id,
         date: Time.zone.now.to_date,
-        points: -DiscourseGamification::SolutionTopic.score_multiplier,
+        points: -SiteSetting.accepted_solution_topic_event_score_value,
         reason: "accepted_solution_topic_removed",
       )
     end
