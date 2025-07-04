@@ -128,12 +128,17 @@ after_initialize do
         if object.respond_to?(:id)
           object.id
         elsif object.is_a?(Hash)
-          object["id"] || object[:id]
+          if object[:user].respond_to?(:id)
+            object[:user].id
+          elsif object["user"].respond_to?(:id)
+            object["user"].id
+          else
+            object[:id] || object["id"]
+          end
         end
   
       Rails.logger.warn("[🎯 basic_user] extracted id: #{id}")
       Rails.logger.warn("[🎯 basic_user] object=#{object.inspect}")
-
   
       if id
         DiscourseGamification::LevelHelper.progress_for(id)
@@ -145,6 +150,7 @@ after_initialize do
       nil
     end
   end
+  
   
 
   # 2. 현재 로그인한 사용자 serializer 확장
