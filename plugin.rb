@@ -24,6 +24,11 @@ register_svg_icon "award"
 
 module ::DiscourseGamification
   PLUGIN_NAME = "discourse-gamification"
+
+  def self.category_allowed?(category_id, category_list)
+    list = category_list.to_s.split("|").map(&:to_i)
+    list.empty? || list.include?(category_id)
+  end
 end
 
 require_relative "lib/discourse_gamification/engine"
@@ -184,35 +189,48 @@ after_initialize do
 
   on(:post_created) do |post, opts, user|
     next if post.post_type != Post.types[:regular]
-    if post.post_number == 1
-      next if post.hidden? || post.wiki || post.deleted_at
-
-      DiscourseGamification::GamificationScoreEvent.record!(
-        user_id: user.id,
-        date: post.created_at.to_date,
-        points: SiteSetting.topic_created_score_value,
-        reason: "topic_created",
-      )
-      next
-    end
     next if post.hidden? || post.wiki || post.deleted_at
 
-    if SiteSetting.score_first_reply_of_day_enabled
-      already_exists = DiscourseGamification::GamificationScoreEvent.exists?(
-        user_id: user.id,
-        date: post.created_at.to_date,
-        reason: "daily_first_reply"
-      )
+    category_id = post.topic.category_id
 
-      if !already_exists
+    if post.post_number == 1
+      if DiscourseGamification::TopicCreated.enabled? &&
+           DiscourseGamification.category_allowed?(category_id, SiteSetting.post_created_event_categories)
         DiscourseGamification::GamificationScoreEvent.record!(
           user_id: user.id,
           date: post.created_at.to_date,
-          points: SiteSetting.first_reply_of_day_score_value,
-          reason: "daily_first_reply",
-          description: "하루 최초 댓글"
+          points: SiteSetting.topic_created_score_value,
+          reason: "topic_created",
         )
       end
+    else
+      if SiteSetting.score_first_reply_of_day_enabled
+        already_exists = DiscourseGamification::GamificationScoreEvent.exists?(
+          user_id: user.id,
+          date: post.created_at.to_date,
+          reason: "daily_first_reply"
+        )
+
+        if !already_exists
+          DiscourseGamification::GamificationScoreEvent.record!(
+            user_id: user.id,
+            date: post.created_at.to_date,
+            points: SiteSetting.first_reply_of_day_score_value,
+            reason: "daily_first_reply",
+            description: "하루 최초 댓글"
+          )
+        end
+      end
+    end
+
+    if DiscourseGamification::PostCreated.enabled? &&
+         DiscourseGamification.category_allowed?(category_id, SiteSetting.post_created_event_categories)
+      DiscourseGamification::GamificationScoreEvent.record!(
+        user_id: user.id,
+        date: post.created_at.to_date,
+        points: SiteSetting.post_created_score_value,
+        reason: "post_created",
+      )
     end
   end
   
@@ -262,7 +280,10 @@ after_initialize do
   end
 
   on(:accepted_solution) do |post|
-    if DiscourseGamification::Solutions.enabled?
+    category_id = post.topic.category_id
+
+    if DiscourseGamification::Solutions.enabled? &&
+         DiscourseGamification.category_allowed?(category_id, SiteSetting.accepted_solution_event_categories)
       DiscourseGamification::GamificationScoreEvent.record!(
         user_id: post.user_id,
         date: Time.zone.now.to_date,
@@ -271,7 +292,8 @@ after_initialize do
       )
     end
 
-    if DiscourseGamification::SolutionTopic.enabled?
+    if DiscourseGamification::SolutionTopic.enabled? &&
+         DiscourseGamification.category_allowed?(category_id, SiteSetting.accepted_solution_topic_event_categories)
       DiscourseGamification::GamificationScoreEvent.record!(
         user_id: post.topic.user_id,
         date: Time.zone.now.to_date,
@@ -282,7 +304,10 @@ after_initialize do
   end
 
   on(:unaccepted_solution) do |post|
-    if DiscourseGamification::Solutions.enabled?
+    category_id = post.topic.category_id
+
+    if DiscourseGamification::Solutions.enabled? &&
+         DiscourseGamification.category_allowed?(category_id, SiteSetting.accepted_solution_event_categories)
       DiscourseGamification::GamificationScoreEvent.record!(
         user_id: post.user_id,
         date: Time.zone.now.to_date,
@@ -291,7 +316,8 @@ after_initialize do
       )
     end
 
-    if DiscourseGamification::SolutionTopic.enabled?
+    if DiscourseGamification::SolutionTopic.enabled? &&
+         DiscourseGamification.category_allowed?(category_id, SiteSetting.accepted_solution_topic_event_categories)
       DiscourseGamification::GamificationScoreEvent.record!(
         user_id: post.topic.user_id,
         date: Time.zone.now.to_date,

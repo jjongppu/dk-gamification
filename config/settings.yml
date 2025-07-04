@@ -60,3 +60,16 @@ discourse_gamification:
       - dense_rank
       - rank
       - row_number
+
+  ## Instant event category filters
+  instant_event_category_filters:
+    type: header
+  post_created_event_categories:
+    type: category_list
+    default: ""
+  accepted_solution_event_categories:
+    type: category_list
+    default: ""
+  accepted_solution_topic_event_categories:
+    type: category_list
+    default: ""
