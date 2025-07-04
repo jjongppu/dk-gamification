@@ -211,7 +211,8 @@ after_initialize do
       end
     end
 
-    if SiteSetting.post_created_event_score_value.to_i > 0 &&
+    if post.post_number == 1 &&
+         SiteSetting.post_created_event_score_value.to_i > 0 &&
          DiscourseGamification.category_allowed?(category_id, SiteSetting.post_created_event_categories)
       DiscourseGamification::GamificationScoreEvent.record!(
         user_id: user.id,

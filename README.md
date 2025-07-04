@@ -41,5 +41,7 @@ Default score settings include:
 | `accepted_solution_event_score_value` | 5 |
 | `accepted_solution_topic_event_score_value` | 2 |
 
+`post_created_event_score_value` awards points only for creating new topics, not for replies.
+
 Set any of these values to `0` to disable scoring for that action. Changes take
 effect immediately for new events.
