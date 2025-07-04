@@ -12,6 +12,11 @@ class DiscourseGamification::CheckInsController < ApplicationController
 
     today = Date.current
     reason = SiteSetting.day_visited_score_reason
+    points = if today.saturday? || today.sunday?
+      SiteSetting.day_visited_weekend_score_value
+    else
+      SiteSetting.day_visited_score_value
+    end
 
     existing = DiscourseGamification::GamificationScoreEvent.find_by(
       user_id: current_user.id,
@@ -25,7 +30,7 @@ class DiscourseGamification::CheckInsController < ApplicationController
       event = DiscourseGamification::GamificationScoreEvent.record!(
         user_id: current_user.id,
         date: today,
-        points: SiteSetting.day_visited_score_value,
+        points: points,
         reason: reason,
       )
 

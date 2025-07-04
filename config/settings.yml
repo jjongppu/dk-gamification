@@ -42,6 +42,8 @@ discourse_gamification:
     default: 10
   day_visited_score_value:
     default: 1
+  day_visited_weekend_score_value:
+    default: 20
   score_day_visited_enabled:
     default: true
     client: true
