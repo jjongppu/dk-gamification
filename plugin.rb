@@ -132,6 +132,8 @@ after_initialize do
         end
   
       Rails.logger.warn("[🎯 basic_user] extracted id: #{id}")
+      Rails.logger.warn("[🎯 basic_user] object=#{object.inspect}")
+
   
       if id
         DiscourseGamification::LevelHelper.progress_for(id)
@@ -156,8 +158,29 @@ after_initialize do
   end
 
   add_to_serializer(:post, :user, include_condition: -> { true }) do
-    BasicUserSerializer.new(object.user, scope: scope, root: false)
+    begin
+      user = object.user
+  
+      if user.nil?
+        Rails.logger.warn("[⚠️ PostSerializer] user is nil for post_id=#{object.id}")
+        nil
+      elsif user.is_a?(Hash)
+        id = user["id"] || user[:id]
+        Rails.logger.warn("[⚠️ PostSerializer] user is a Hash for post_id=#{object.id}, id=#{id}")
+        BasicUserSerializer.new(OpenStruct.new(id: id), scope: scope, root: false)
+      elsif user.respond_to?(:id)
+        Rails.logger.info("[✅ PostSerializer] Serializing User object with id=#{user.id} for post_id=#{object.id}")
+        BasicUserSerializer.new(user, scope: scope, root: false)
+      else
+        Rails.logger.error("[❌ PostSerializer] Unexpected user type for post_id=#{object.id}: #{user.class}")
+        nil
+      end
+    rescue => e
+      Rails.logger.error("[❌ PostSerializer] Exception for post_id=#{object&.id}: #{e.message}")
+      nil
+    end
   end
+  
   
 
 
