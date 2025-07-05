@@ -6,9 +6,11 @@ export default {
   initialize() {
     withPluginApi("0.8.25", (api) => {
       api.decorateWidget("poster-name:before", (helper) => {
-        const user = helper.attrs.user;
-        const levelInfo = user?.gamification_level_info;
-        console.log('gamification_level_info user image ::::', levelInfo);
+        // const user = helper.attrs.user;
+        const levelInfo = helper.attrs.gamification_level_info; // post에 직접 포함된 속성으로 변경됨!
+
+        console.log('1.helper.attrs ::::', helper.attrs);
+        console.log('2.gamification_level_info::::', levelInfo);
         if (!levelInfo) return;
 
         const image = helper.h("img", {

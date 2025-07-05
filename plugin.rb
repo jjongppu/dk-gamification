@@ -154,6 +154,21 @@ after_initialize do
       nil
     end
   end
+
+  add_to_serializer(:post, :gamification_level_info, include_condition: -> { true }) do
+    begin
+      id = object.user&.id
+      if id
+        Rails.logger.warn("[💚 post] id 존재함: #{id}")
+        DiscourseGamification::LevelHelper.progress_for(id)
+      else
+        nil
+      end
+    rescue => e
+      Rails.logger.error("Gamification Level Error (post): #{e.message}")
+      nil
+    end
+  end
     
   # 🎯 basic_user serializer에 속성 목록을 명시적으로 추가한다
   # add_to_serializer(:basic_user, :attributes) do
