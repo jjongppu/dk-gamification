@@ -217,6 +217,7 @@ after_initialize do
           date: post.created_at.to_date,
           points: SiteSetting.topic_created_score_value,
           reason: "topic_created",
+          description: "게시물게시",
         )
       end
     else
@@ -233,7 +234,7 @@ after_initialize do
             date: post.created_at.to_date,
             points: SiteSetting.first_reply_of_day_score_value,
             reason: "daily_first_reply",
-            description: "하루 최초 댓글"
+            description: "댓글"
           )
         end
       end
@@ -247,6 +248,7 @@ after_initialize do
         date: post.created_at.to_date,
         points: SiteSetting.post_created_event_score_value,
         reason: "post_created",
+        description: "게시물게시",
       )
     end
   end

@@ -9,6 +9,7 @@ module DiscourseGamification
 
     def call
       return unless SiteSetting.discourse_gamification_enabled
+      return if SiteSetting.score_day_visited_enabled
 
       today = Date.current
       return if GamificationScoreEvent.exists?(user_id: @user.id, date: today, description: DESCRIPTION)
