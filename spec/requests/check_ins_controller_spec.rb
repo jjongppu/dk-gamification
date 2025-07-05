@@ -23,4 +23,22 @@ RSpec.describe DiscourseGamification::CheckInsController do
     post "/gamification/check-in.json"
     expect(response.parsed_body["points_awarded"]).to eq(false)
   end
+
+  it "uses weekend score value" do
+    sign_in(user)
+    SiteSetting.day_visited_score_value = 10
+    SiteSetting.day_visited_weekend_score_value = 20
+
+    freeze_time Date.parse("2022-01-01") do
+      post "/gamification/check-in.json"
+      expect(response.parsed_body["points"]).to eq(20)
+      expect(DiscourseGamification::GamificationScoreEvent.last.description).to eq("주말출석")
+    end
+
+    freeze_time Date.parse("2022-01-03") do
+      post "/gamification/check-in.json"
+      expect(response.parsed_body["points"]).to eq(10)
+      expect(DiscourseGamification::GamificationScoreEvent.last.description).to eq("출석")
+    end
+  end
 end
