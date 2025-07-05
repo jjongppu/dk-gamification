@@ -141,8 +141,12 @@ after_initialize do
       Rails.logger.warn("[🎯 basic_user] object=#{object.inspect}")
   
       if id
-        DiscourseGamification::LevelHelper.progress_for(id)
+        Rails.logger.warn("[🎯 basic_user] id 존재함: #{id}")
+        progress = DiscourseGamification::LevelHelper.progress_for(id)
+        Rails.logger.warn("[🎯 basic_user] progress=#{progress.inspect}")
+        progress
       else
+        Rails.logger.warn("[🎯 basic_user] id XXX: #{object.inspect}")
         nil
       end
     rescue => e
@@ -152,9 +156,9 @@ after_initialize do
   end
     
   # 🎯 basic_user serializer에 속성 목록을 명시적으로 추가한다
-  add_to_serializer(:basic_user, :attributes) do
-    (defined?(super) ? Array(super) : []) + [:gamification_level_info]
-  end
+  # add_to_serializer(:basic_user, :attributes) do
+  #   (defined?(super) ? Array(super) : []) + [:gamification_level_info]
+  # end
   
 
   # 2. 현재 로그인한 사용자 serializer 확장
