@@ -12,11 +12,13 @@ class DiscourseGamification::CheckInsController < ApplicationController
 
     today = Date.current
     reason = SiteSetting.day_visited_score_reason
-    points = if today.saturday? || today.sunday?
+    weekend = today.saturday? || today.sunday?
+    points = if weekend
       SiteSetting.day_visited_weekend_score_value
     else
       SiteSetting.day_visited_score_value
     end
+    description = weekend ? "주말출석" : "출석"
 
     existing = DiscourseGamification::GamificationScoreEvent.find_by(
       user_id: current_user.id,
@@ -32,6 +34,7 @@ class DiscourseGamification::CheckInsController < ApplicationController
         date: today,
         points: points,
         reason: reason,
+        description: description,
       )
 
       render json: { points_awarded: true, points: event.points }
