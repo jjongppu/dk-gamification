@@ -1,6 +1,5 @@
 module DiscourseGamification
   class FirstLoginRewarder
-    POINTS = 10
     DESCRIPTION = "first_login"
 
     def initialize(user)
@@ -14,10 +13,17 @@ module DiscourseGamification
       today = Date.current
       return if GamificationScoreEvent.exists?(user_id: @user.id, date: today, description: DESCRIPTION)
 
+      weekend = today.saturday? || today.sunday?
+      points = if weekend
+        SiteSetting.day_visited_weekend_score_value
+      else
+        SiteSetting.day_visited_score_value
+      end
+
       GamificationScoreEvent.create!(
         user_id: @user.id,
         date: today,
-        points: POINTS,
+        points: points,
         description: DESCRIPTION,
         reason: DESCRIPTION,
       )
