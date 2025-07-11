@@ -46,3 +46,13 @@ Default score settings include:
 
 Set any of these values to `0` to disable scoring for that action. Changes take
 effect immediately for new events.
+
+### Gamification Score Events
+
+The `gamification_score_events` table stores the history of points awarded. Important columns include:
+- `user_id` and `date` of the event
+- `points` amount and `reason`
+- optional `description`
+- `related_id` identifies the topic, reply or other entity linked to the event
+- `related_type` describes the entity type such as `topic`, `reply` or `user`
+
