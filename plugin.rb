@@ -237,6 +237,8 @@ after_initialize do
           points: SiteSetting.topic_created_score_value,
           reason: "topic_created",
           description: "게시물게시",
+          related_id: post.topic_id,
+          related_type: "topic",
         )
       end
     else
@@ -253,7 +255,9 @@ after_initialize do
             date: post.created_at.to_date,
             points: SiteSetting.first_reply_of_day_score_value,
             reason: "daily_first_reply",
-            description: "댓글"
+            description: "댓글",
+            related_id: post.id,
+            related_type: "reply"
           )
         end
       end
@@ -268,6 +272,8 @@ after_initialize do
         points: SiteSetting.post_created_event_score_value,
         reason: "post_created",
         description: "게시물게시",
+        related_id: post.topic_id,
+        related_type: "topic",
       )
     end
   end
@@ -327,6 +333,9 @@ after_initialize do
         date: Time.zone.now.to_date,
         points: SiteSetting.accepted_solution_event_score_value,
         reason: "accepted_solution",
+        description: "accepted_solution",
+        related_id: post.topic_id,
+        related_type: "topic",
       )
     end
 
@@ -351,6 +360,9 @@ after_initialize do
         date: Time.zone.now.to_date,
         points: -SiteSetting.accepted_solution_event_score_value,
         reason: "accepted_solution_removed",
+        description: "accepted_solution_removed",
+        related_id: post.topic_id,
+        related_type: "topic",
       )
     end
 
