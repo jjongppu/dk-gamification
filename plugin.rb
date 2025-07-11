@@ -333,7 +333,7 @@ after_initialize do
         date: Time.zone.now.to_date,
         points: SiteSetting.accepted_solution_event_score_value,
         reason: "accepted_solution",
-        description: "accepted_solution",
+        description: "솔루션 채택 / 포인트 회수",
         related_id: post.topic_id,
         related_type: "topic",
       )
@@ -346,6 +346,9 @@ after_initialize do
         date: Time.zone.now.to_date,
         points: SiteSetting.accepted_solution_topic_event_score_value,
         reason: "accepted_solution_topic",
+        description: "솔루션 채택 / 작성자에게 포인트 부여",
+        related_id: post.topic_id,
+        related_type: "topic",
       )
     end
   end
@@ -360,7 +363,7 @@ after_initialize do
         date: Time.zone.now.to_date,
         points: -SiteSetting.accepted_solution_event_score_value,
         reason: "accepted_solution_removed",
-        description: "accepted_solution_removed",
+        description: "솔루션 채택 취소 / 포인트 회수",
         related_id: post.topic_id,
         related_type: "topic",
       )
@@ -373,6 +376,9 @@ after_initialize do
         date: Time.zone.now.to_date,
         points: -SiteSetting.accepted_solution_topic_event_score_value,
         reason: "accepted_solution_topic_removed",
+        description: "솔루션 채택 취소 / 작성자에게 포인트 회수",
+        related_id: post.topic_id,
+        related_type: "topic",
       )
     end
   end
