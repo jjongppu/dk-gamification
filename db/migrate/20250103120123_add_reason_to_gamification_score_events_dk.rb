@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class AddReasonToGamificationScoreEvents < ActiveRecord::Migration[7.0]
+class AddReasonToGamificationScoreEventsDk < ActiveRecord::Migration[7.0]
   def up
     add_column :gamification_score_events, :reason, :string, default: "", null: true
     execute <<~SQL
