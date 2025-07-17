@@ -28,7 +28,7 @@ Discourse::Application.routes.draw do
   put "/admin/plugins/gamification/recalculate-scores" =>
         "dk_gamification/admin_gamification_leaderboard#recalculate_scores",
       :constraints => StaffConstraint.new,
-      :as => :recalculate_scores
+      :as => :dk_recalculate_scores
 end
 
 Discourse::Application.routes.draw do
