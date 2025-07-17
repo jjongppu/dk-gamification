@@ -1,14 +1,14 @@
 import { service } from "@ember/service";
 import { ajax } from "discourse/lib/ajax";
 import DiscourseRoute from "discourse/routes/discourse";
-import GamificationLeaderboard from "discourse/plugins/discourse-gamification/discourse/models/gamification-leaderboard";
+import GamificationLeaderboard from "discourse/plugins/dk-gamification/discourse/models/gamification-leaderboard";
 
-export default class DiscourseGamificationLeaderboardShow extends DiscourseRoute {
+export default class DKGamificationLeaderboardShow extends DiscourseRoute {
   @service adminPluginNavManager;
 
   model(params) {
     const leaderboardsData = this.modelFor(
-      "adminPlugins.show.discourse-gamification-leaderboards"
+      "adminPlugins.show.dk-gamification-leaderboards"
     );
     const id = parseInt(params.id, 10);
 
@@ -18,7 +18,7 @@ export default class DiscourseGamificationLeaderboardShow extends DiscourseRoute
     }
 
     return ajax(
-      `/admin/plugins/discourse-gamification/leaderboards/${id}`
+      `/admin/plugins/dk-gamification/leaderboards/${id}`
     ).then((response) => GamificationLeaderboard.create(response.leaderboard));
   }
 }

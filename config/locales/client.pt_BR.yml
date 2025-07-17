@@ -9,7 +9,7 @@ pt_BR:
     admin:
       site_settings:
         categories:
-          discourse_gamification: "Discourse Gamification"
+          dk_gamification: "Discourse Gamification"
   js:
     gamification_score: "Saudações"
     gamification:

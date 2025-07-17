@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module DiscourseGamification
+module DKGamification
   module UserLevelSerializerExtension
     def self.register!
       ::UserCardSerializer.class_eval do
@@ -8,7 +8,7 @@ module DiscourseGamification
 
         def gamification_level_info
           return nil unless object&.id
-          DiscourseGamification::LevelHelper.progress_for(object.id)
+          DKGamification::LevelHelper.progress_for(object.id)
         rescue => e
           Rails.logger.error("Gamification Level Error: #{e.message}")
           nil
@@ -16,7 +16,7 @@ module DiscourseGamification
 
         def user_level_image_url
           return nil unless object&.id
-          info = DiscourseGamification::LevelHelper.progress_for(object.id)
+          info = DKGamification::LevelHelper.progress_for(object.id)
           info[:image_url] if info
         rescue => e
           Rails.logger.error("Gamification Level Image Error: #{e.message}")
@@ -29,7 +29,7 @@ module DiscourseGamification
 
         def gamification_level_info
           return nil unless object&.user_id
-          DiscourseGamification::LevelHelper.progress_for(object.user_id)
+          DKGamification::LevelHelper.progress_for(object.user_id)
         rescue => e
           Rails.logger.error("Gamification Level Error: #{e.message}")
           nil
@@ -37,7 +37,7 @@ module DiscourseGamification
 
         def user_level_image_url
           return nil unless object&.user_id
-          info = DiscourseGamification::LevelHelper.progress_for(object.user_id)
+          info = DKGamification::LevelHelper.progress_for(object.user_id)
           info[:image_url] if info
         rescue => e
           Rails.logger.error("Gamification Level Image Error: #{e.message}")

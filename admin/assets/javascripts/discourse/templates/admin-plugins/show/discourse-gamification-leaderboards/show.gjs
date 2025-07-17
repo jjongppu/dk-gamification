@@ -1,5 +1,5 @@
 import RouteTemplate from "ember-route-template";
-import AdminEditLeaderboard from "discourse/plugins/discourse-gamification/admin/components/admin-edit-leaderboard";
+import AdminEditLeaderboard from "discourse/plugins/dk-gamification/admin/components/admin-edit-leaderboard";
 
 export default RouteTemplate(
   <template>

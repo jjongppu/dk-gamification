@@ -7,10 +7,10 @@ module Jobs
       raise Discourse::InvalidParameters.new(:leaderboard_id) if leaderboard_id.blank?
 
       leaderboard =
-        DiscourseGamification::GamificationLeaderboard.find_by(id: leaderboard_id) ||
-          DiscourseGamification::DeletedGamificationLeaderboard.new(leaderboard_id)
+        DKGamification::GamificationLeaderboard.find_by(id: leaderboard_id) ||
+          DKGamification::DeletedGamificationLeaderboard.new(leaderboard_id)
 
-      DiscourseGamification::LeaderboardCachedView.new(leaderboard).delete
+      DKGamification::LeaderboardCachedView.new(leaderboard).delete
     end
   end
 end

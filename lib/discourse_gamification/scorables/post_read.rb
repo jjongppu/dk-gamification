@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ::DiscourseGamification
+module ::DKGamification
   class PostRead < Scorable
     def self.score_multiplier
       SiteSetting.post_read_score_value

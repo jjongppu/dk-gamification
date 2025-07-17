@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-module ::DiscourseGamification
+module ::DKGamification
   class Scorable
     class << self
       def enabled?

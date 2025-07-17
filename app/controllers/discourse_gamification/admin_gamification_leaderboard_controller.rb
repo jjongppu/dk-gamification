@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-class DiscourseGamification::AdminGamificationLeaderboardController < Admin::AdminController
-  requires_plugin DiscourseGamification::PLUGIN_NAME
+class DKGamification::AdminGamificationLeaderboardController < Admin::AdminController
+  requires_plugin DKGamification::PLUGIN_NAME
 
   def index
     render_serialized(
-      { leaderboards: DiscourseGamification::GamificationLeaderboard.all },
+      { leaderboards: DKGamification::GamificationLeaderboard.all },
       AdminGamificationIndexSerializer,
       root: false,
     )
@@ -14,7 +14,7 @@ class DiscourseGamification::AdminGamificationLeaderboardController < Admin::Adm
   def show
     render json:
              LeaderboardSerializer.new(
-               DiscourseGamification::GamificationLeaderboard.find(params[:id]),
+               DKGamification::GamificationLeaderboard.find(params[:id]),
              )
   end
 
@@ -22,7 +22,7 @@ class DiscourseGamification::AdminGamificationLeaderboardController < Admin::Adm
     params.require(%i[name created_by_id])
 
     leaderboard =
-      DiscourseGamification::GamificationLeaderboard.new(
+      DKGamification::GamificationLeaderboard.new(
         name: params[:name],
         created_by_id: params[:created_by_id],
       )
@@ -38,7 +38,7 @@ class DiscourseGamification::AdminGamificationLeaderboardController < Admin::Adm
   def update
     params.require(%i[id name])
 
-    leaderboard = DiscourseGamification::GamificationLeaderboard.find(params[:id])
+    leaderboard = DKGamification::GamificationLeaderboard.find(params[:id])
     raise Discourse::NotFound unless leaderboard
 
     leaderboard.update(
@@ -65,7 +65,7 @@ class DiscourseGamification::AdminGamificationLeaderboardController < Admin::Adm
   def destroy
     params.require(:id)
 
-    leaderboard = DiscourseGamification::GamificationLeaderboard.find(params[:id])
+    leaderboard = DKGamification::GamificationLeaderboard.find(params[:id])
 
     if leaderboard && leaderboard.destroy
       Jobs.enqueue(Jobs::DeleteLeaderboardPositions, leaderboard_id: leaderboard.id)
@@ -75,7 +75,7 @@ class DiscourseGamification::AdminGamificationLeaderboardController < Admin::Adm
   end
 
   def recalculate_scores
-    DiscourseGamification::RecalculateScoresRateLimiter.perform!
+    DKGamification::RecalculateScoresRateLimiter.perform!
 
     since =
       begin

@@ -5,7 +5,7 @@ export default {
 
   map() {
     this.route(
-      "discourse-gamification-leaderboards",
+      "dk-gamification-leaderboards",
       { path: "leaderboards" },
       function () {
         this.route("show", { path: "/:id" });

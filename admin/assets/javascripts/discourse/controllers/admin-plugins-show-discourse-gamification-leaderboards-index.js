@@ -5,9 +5,9 @@ import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import discourseComputed from "discourse/lib/decorators";
 import { i18n } from "discourse-i18n";
-import RecalculateScoresForm from "discourse/plugins/discourse-gamification/discourse/components/modal/recalculate-scores-form";
+import RecalculateScoresForm from "discourse/plugins/dk-gamification/discourse/components/modal/recalculate-scores-form";
 
-export default class AdminPluginsShowDiscourseGamificationLeaderboardsIndexController extends Controller {
+export default class AdminPluginsShowDKGamificationLeaderboardsIndexController extends Controller {
   @service modal;
   @service dialog;
   @service toasts;

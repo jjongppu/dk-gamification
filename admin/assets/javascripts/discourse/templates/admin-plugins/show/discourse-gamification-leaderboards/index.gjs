@@ -6,7 +6,7 @@ import DButton from "discourse/components/d-button";
 import DPageSubheader from "discourse/components/d-page-subheader";
 import formatDate from "discourse/helpers/format-date";
 import { i18n } from "discourse-i18n";
-import AdminCreateLeaderboard from "discourse/plugins/discourse-gamification/admin/components/admin-create-leaderboard";
+import AdminCreateLeaderboard from "discourse/plugins/dk-gamification/admin/components/admin-create-leaderboard";
 
 export default RouteTemplate(
   <template>
@@ -15,7 +15,7 @@ export default RouteTemplate(
       @label={{i18n "gamification.leaderboard.title"}}
     />
 
-    <div class="discourse-gamification__leaderboards admin-detail">
+    <div class="dk-gamification__leaderboards admin-detail">
       <DPageSubheader @titleLabel={{i18n "gamification.leaderboard.title"}}>
         <:actions as |actions|>
           {{#if @controller.model.leaderboards}}
@@ -74,7 +74,7 @@ export default RouteTemplate(
                   <td style="width: 120px">
                     <div class="leaderboard-admin__listitem-action">
                       <LinkTo
-                        @route="adminPlugins.show.discourse-gamification-leaderboards.show"
+                        @route="adminPlugins.show.dk-gamification-leaderboards.show"
                         @model={{leaderboard}}
                         class="btn leaderboard-admin__edit btn-text btn-small"
                       >{{i18n "gamification.edit"}} </LinkTo>

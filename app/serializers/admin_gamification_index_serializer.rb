@@ -14,6 +14,6 @@ class AdminGamificationIndexSerializer < ApplicationSerializer
   end
 
   def gamification_recalculate_scores_remaining
-    DiscourseGamification::RecalculateScoresRateLimiter.remaining
+    DKGamification::RecalculateScoresRateLimiter.remaining
   end
 end

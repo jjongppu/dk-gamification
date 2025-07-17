@@ -9,7 +9,7 @@ cs:
     admin:
       site_settings:
         categories:
-          discourse_gamification: "Discourse Gamification"
+          dk_gamification: "Discourse Gamification"
   js:
     gamification_score: "Ovace"
     gamification:

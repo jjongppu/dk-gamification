@@ -1,7 +1,7 @@
 import { withPluginApi } from "discourse/lib/plugin-api";
 
 export default {
-  name: "discourse-gamification-admin-plugin-configuration-nav",
+  name: "dk-gamification-admin-plugin-configuration-nav",
 
   initialize(container) {
     const currentUser = container.lookup("service:current-user");
@@ -10,10 +10,10 @@ export default {
     }
 
     withPluginApi("1.1.0", (api) => {
-      api.addAdminPluginConfigurationNav("discourse-gamification", [
+      api.addAdminPluginConfigurationNav("dk-gamification", [
         {
           label: "gamification.leaderboard.title",
-          route: "adminPlugins.show.discourse-gamification-leaderboards",
+          route: "adminPlugins.show.dk-gamification-leaderboards",
         },
       ]);
     });

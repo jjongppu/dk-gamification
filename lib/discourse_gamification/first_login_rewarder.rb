@@ -1,4 +1,4 @@
-module DiscourseGamification
+module DKGamification
   class FirstLoginRewarder
     DESCRIPTION = "first_login"
 
@@ -7,7 +7,7 @@ module DiscourseGamification
     end
 
     def call
-      return unless SiteSetting.discourse_gamification_enabled
+      return unless SiteSetting.dk_gamification_enabled
       return if SiteSetting.score_day_visited_enabled
 
       today = Date.current

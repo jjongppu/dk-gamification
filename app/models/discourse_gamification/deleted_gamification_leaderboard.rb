@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ::DiscourseGamification
+module ::DKGamification
   class DeletedGamificationLeaderboard
     attr_reader :id
 

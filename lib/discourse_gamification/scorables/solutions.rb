@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-module ::DiscourseGamification
+module ::DKGamification
   class Solutions < Scorable
     def self.enabled?
       defined?(DiscourseSolved) && SiteSetting.solved_enabled && super

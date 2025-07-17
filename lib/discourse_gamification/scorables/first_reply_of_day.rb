@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ::DiscourseGamification
+module ::DKGamification
   class FirstReplyOfDay < Scorable
     def self.score_multiplier
       SiteSetting.first_reply_of_day_score_value

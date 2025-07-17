@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ::DiscourseGamification
+module ::DKGamification
   class GamificationLeaderboard < ::ActiveRecord::Base
     PAGE_SIZE = 100
 

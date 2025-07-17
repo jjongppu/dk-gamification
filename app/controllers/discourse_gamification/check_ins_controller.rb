@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class DiscourseGamification::CheckInsController < ApplicationController
-  requires_plugin DiscourseGamification::PLUGIN_NAME
+class DKGamification::CheckInsController < ApplicationController
+  requires_plugin DKGamification::PLUGIN_NAME
   before_action :ensure_logged_in
 
   def create
@@ -20,7 +20,7 @@ class DiscourseGamification::CheckInsController < ApplicationController
     end
     description = weekend ? "주말출석" : "출석"
 
-    existing = DiscourseGamification::GamificationScoreEvent.find_by(
+    existing = DKGamification::GamificationScoreEvent.find_by(
       user_id: current_user.id,
       date: today,
       reason: reason,
@@ -29,7 +29,7 @@ class DiscourseGamification::CheckInsController < ApplicationController
     if existing
       render json: { points_awarded: false, points: 0 }
     else
-      event = DiscourseGamification::GamificationScoreEvent.record!(
+      event = DKGamification::GamificationScoreEvent.record!(
         user_id: current_user.id,
         date: today,
         points: points,

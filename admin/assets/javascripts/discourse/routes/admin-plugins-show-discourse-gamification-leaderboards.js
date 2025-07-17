@@ -1,9 +1,9 @@
 import EmberObject from "@ember/object";
 import { service } from "@ember/service";
 import DiscourseRoute from "discourse/routes/discourse";
-import GamificationLeaderboard from "discourse/plugins/discourse-gamification/discourse/models/gamification-leaderboard";
+import GamificationLeaderboard from "discourse/plugins/dk-gamification/discourse/models/gamification-leaderboard";
 
-export default class DiscourseGamificationLeaderboards extends DiscourseRoute {
+export default class DKGamificationLeaderboards extends DiscourseRoute {
   @service adminPluginNavManager;
 
   model() {

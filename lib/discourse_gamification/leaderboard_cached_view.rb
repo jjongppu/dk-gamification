@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ::DiscourseGamification
+module ::DKGamification
   class LeaderboardCachedView
     class NotReadyError < StandardError
     end

@@ -9,7 +9,7 @@ nl:
     admin:
       site_settings:
         categories:
-          discourse_gamification: "Discourse Gamification"
+          dk_gamification: "Discourse Gamification"
   js:
     gamification_score: "Aanmoedigingen"
     gamification:
