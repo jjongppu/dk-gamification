@@ -10,7 +10,12 @@ class CreateGamificationScoreEventsDk < ActiveRecord::Migration[7.0]
       t.timestamps
     end
 
-    add_index :gamification_score_events, %i[user_id date], unique: false
-    add_index :gamification_score_events, %i[date], unique: false
+    unless index_exists?(:gamification_score_events, [:user_id, :date])
+      add_index :gamification_score_events, [:user_id, :date]
+    end
+
+    unless index_exists?(:gamification_score_events, :date)
+      add_index :gamification_score_events, :date
+    end
   end
 end

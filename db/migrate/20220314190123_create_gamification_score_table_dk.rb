@@ -7,7 +7,12 @@ class CreateGamificationScoreTableDk < ActiveRecord::Migration[6.1]
       t.integer :score, null: false
     end
 
-    add_index :gamification_scores, %i[user_id date], unique: true
-    add_index :gamification_scores, :date
+    unless index_exists?(:gamification_scores, [:user_id, :date], unique: true)
+      add_index :gamification_scores, [:user_id, :date], unique: true
+    end
+
+    unless index_exists?(:gamification_scores, :date)
+      add_index :gamification_scores, :date
+    end
   end
 end
