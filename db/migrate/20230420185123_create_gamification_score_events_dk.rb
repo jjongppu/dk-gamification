@@ -1,7 +1,7 @@
 # frozen_string_literal: true
-class CreateGamificationScoreEvents < ActiveRecord::Migration[7.0]
+class CreateGamificationScoreEventsDk < ActiveRecord::Migration[7.0]
   def change
-    create_table :gamification_score_events do |t|
+    create_table :gamification_score_events, if_not_exists: true do |t|
       t.integer :user_id, null: false
       t.date :date, null: false
       t.integer :points, null: false
