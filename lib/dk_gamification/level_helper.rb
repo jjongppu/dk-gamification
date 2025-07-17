@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module DKGamification
+module DkGamification
   class LevelHelper
 
     def self.progress_for(user_id)

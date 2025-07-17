@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module DKGamification
+module DkGamification
   class GamificationScoreEvent < ActiveRecord::Base
     self.table_name = "gamification_score_events"
 

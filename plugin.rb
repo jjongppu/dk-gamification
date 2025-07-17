@@ -6,7 +6,7 @@
 # authors: Discourse
 # url: https://github.com/discourse/dk-gamification
 
-module ::DKGamification
+module ::DkGamification
   PLUGIN_NAME = "dk-gamification"
 end
 
@@ -19,5 +19,5 @@ after_initialize do
   require_relative "lib/dk_gamification/level_helper"
   require_relative "lib/dk_gamification/user_level_serializer_extension"
 
-  DKGamification::UserLevelSerializerExtension.register!
+  DkGamification::UserLevelSerializerExtension.register!
 end

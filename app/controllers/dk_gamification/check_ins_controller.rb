@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-module DKGamification
+module DkGamification
   class CheckInsController < ::ApplicationController
-    requires_plugin DKGamification::PLUGIN_NAME
+    requires_plugin DkGamification::PLUGIN_NAME
     before_action :ensure_logged_in
 
     def create
@@ -17,7 +17,7 @@ module DKGamification
       points = weekend ? SiteSetting.day_visited_weekend_score_value : SiteSetting.day_visited_score_value
       description = weekend ? "주말출석" : "출석"
 
-      existing = DKGamification::GamificationScoreEvent.find_by(
+      existing = DkGamification::GamificationScoreEvent.find_by(
         user_id: current_user.id,
         date: today,
         reason: reason,
@@ -26,7 +26,7 @@ module DKGamification
       if existing
         render json: { points_awarded: false, points: 0 }
       else
-        event = DKGamification::GamificationScoreEvent.record!(
+        event = DkGamification::GamificationScoreEvent.record!(
           user_id: current_user.id,
           date: today,
           points: points,
