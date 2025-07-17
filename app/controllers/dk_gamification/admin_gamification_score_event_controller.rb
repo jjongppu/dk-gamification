@@ -1,6 +1,7 @@
 # frozen_string_literal: true
-module ::DKGamification
-  class DKGamification::AdminGamificationScoreEventController < Admin::AdminController
+
+module DKGamification
+  class AdminGamificationScoreEventController < ::Admin::AdminController
     requires_plugin DKGamification::PLUGIN_NAME
 
     def show
@@ -40,11 +41,13 @@ module ::DKGamification
       event = DKGamification::GamificationScoreEvent.find(params[:id])
       raise Discourse::NotFound unless event
 
-      if event.update(points: params[:points],
-                      reason: params[:reason],
-                      description: params[:description] || event.description,
-                      related_id: params[:related_id],
-                      related_type: params[:related_type])
+      if event.update(
+           points: params[:points],
+           reason: params[:reason],
+           description: params[:description] || event.description,
+           related_id: params[:related_id],
+           related_type: params[:related_type],
+         )
         render json: success_json
       else
         render_json_error(event)

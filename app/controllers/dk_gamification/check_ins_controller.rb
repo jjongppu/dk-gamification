@@ -1,6 +1,7 @@
 # frozen_string_literal: true
-module ::DKGamification
-  class DKGamification::CheckInsController < ApplicationController
+
+module DKGamification
+  class CheckInsController < ::ApplicationController
     requires_plugin DKGamification::PLUGIN_NAME
     before_action :ensure_logged_in
 
@@ -13,11 +14,7 @@ module ::DKGamification
       today = Date.current
       reason = SiteSetting.day_visited_score_reason
       weekend = today.saturday? || today.sunday?
-      points = if weekend
-        SiteSetting.day_visited_weekend_score_value
-      else
-        SiteSetting.day_visited_score_value
-      end
+      points = weekend ? SiteSetting.day_visited_weekend_score_value : SiteSetting.day_visited_score_value
       description = weekend ? "주말출석" : "출석"
 
       existing = DKGamification::GamificationScoreEvent.find_by(
