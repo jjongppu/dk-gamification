@@ -13,7 +13,6 @@ end
 enabled_site_setting :dk_gamification_enabled
 
 register_asset "stylesheets/common/gamification-level.scss"
-register_asset "javascripts/initializers/check-in.js"
 
 after_initialize do
   require_relative "lib/dk_gamification/engine"
